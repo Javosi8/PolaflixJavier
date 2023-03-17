@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
@@ -15,6 +16,7 @@ import jakarta.persistence.InheritanceType;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public abstract class Serie {
     
+    @Id
     private String Titulo;    
     private char Inicial;
     private String Sinopsis;
@@ -49,6 +51,12 @@ public abstract class Serie {
     public String getSinopsis() {
         return Sinopsis;
     }
+    public Set<Actor> getActores() {
+        return Actores;
+    }
+    public Set<Creador> getCreadores() {
+        return Creadores;
+    }
     public abstract double getCoste();
     //#endregion
 
@@ -60,6 +68,12 @@ public abstract class Serie {
 
     public void setSinopsis(String sinopsis) {
         Sinopsis = sinopsis;
+    }
+    public void setActores(Set<Actor> actores) {
+        Actores = actores;
+    }
+    public void setCreadores(Set<Creador> creadores) {
+        Creadores = creadores;
     }
     //#endregion
 

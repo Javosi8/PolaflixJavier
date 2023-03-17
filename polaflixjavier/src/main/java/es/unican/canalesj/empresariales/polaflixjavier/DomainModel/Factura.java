@@ -7,10 +7,16 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Entity
 public class Factura implements Comparable<Factura>{
     
+    @Id
+    @GeneratedValue
+    private long id;
+
     private double CosteTotal;
     private Date Fecha;
 

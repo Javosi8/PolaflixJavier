@@ -11,6 +11,8 @@ import java.util.TreeSet;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
 
@@ -19,6 +21,10 @@ import jakarta.persistence.InheritanceType;
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Usuario {
     
+    @Id
+    @GeneratedValue
+    private long id;
+
     private String Username;
     private String Password;
     private String IBAN;

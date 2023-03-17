@@ -3,10 +3,16 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 import java.util.Date;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
 
 @Embeddable
 public class Entrada {
     
+    @Id
+    @GeneratedValue
+    private long id;
+
     private double Coste;
     private Date Fecha;
     private String NombreSerie;

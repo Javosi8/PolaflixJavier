@@ -5,10 +5,12 @@ import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 @Entity
 public class Temporada implements Comparable<Temporada>{
     
+    @Id
     private int NumTemporada;
 
     private Serie Serie;
