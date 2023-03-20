@@ -10,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorColumn(name="tipo")
@@ -17,13 +19,18 @@ import jakarta.persistence.InheritanceType;
 public abstract class Serie {
     
     @Id
+    private long id;
     private String Titulo;    
     private char Inicial;
     private String Sinopsis;
 
+    @OneToMany
     private Set<Temporada> Temporadas;
 
+    @ManyToMany
     private Set<Actor> Actores;
+
+    @ManyToMany
     private Set<Creador> Creadores;
 
     public Serie(String Titulo, String Sinopsis){

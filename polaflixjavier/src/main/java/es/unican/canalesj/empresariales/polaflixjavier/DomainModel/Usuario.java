@@ -11,10 +11,11 @@ import java.util.TreeSet;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 
 @Entity
 @DiscriminatorColumn(name="tipo")
@@ -22,17 +23,18 @@ import jakarta.persistence.InheritanceType;
 public abstract class Usuario {
     
     @Id
-    @GeneratedValue
-    private long id;
-
     private String Username;
     private String Password;
     private String IBAN;
 
+    @ManyToMany
     private Set<Serie> Empezadas;
+    @ManyToMany
     private Set<Serie> Pendientes;
+    @ManyToMany
     private Set<Serie> Terminadas;
 
+    @OneToMany
     private SortedSet<Factura> Facturas;
 
     private Map<Serie, Capitulo> UltimoCapitulo;

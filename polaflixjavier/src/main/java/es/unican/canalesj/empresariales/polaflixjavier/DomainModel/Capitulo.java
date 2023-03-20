@@ -4,6 +4,7 @@ import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
 
 @Entity
 public class Capitulo implements Comparable<Capitulo>{
@@ -15,6 +16,7 @@ public class Capitulo implements Comparable<Capitulo>{
     private String Titulo;
     private String Enlace;
 
+    @ManyToOne
     private Temporada Temporada;
 
     public Capitulo(int NumCapitulo, String Titulo, String Descripcion, int Duracion, String Enlace, Temporada Temporada){
