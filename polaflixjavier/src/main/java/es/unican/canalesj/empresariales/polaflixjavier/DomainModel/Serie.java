@@ -86,7 +86,7 @@ public abstract class Serie {
 
     @Override
     public int hashCode(){
-        return Objects.hash(Titulo, Inicial, Sinopsis);
+        return Objects.hash(Titulo, Sinopsis);
     }
 
     @Override
@@ -100,6 +100,6 @@ public abstract class Serie {
         }
 
         Serie serie = (Serie)o;
-        return (this.Titulo.equals(serie.Titulo))   ;
+        return (this.Titulo.equals(serie.getTitulo()) && (this.Sinopsis.equals(serie.getSinopsis())));
     }
 }

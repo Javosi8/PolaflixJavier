@@ -1,6 +1,7 @@
 package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 
 import java.util.Date;
+import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
 import jakarta.persistence.GeneratedValue;
@@ -62,4 +63,24 @@ public class Entrada {
         NumeroCapitulo = numeroCapitulo;
     }
     //#endregion
+
+    @Override
+    public int hashCode(){
+        return Objects.hash(Coste, Fecha, NombreSerie, NumeroTemporada, NumeroCapitulo);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+
+        if(!(o instanceof Entrada)){
+            return false;
+        }
+
+        Entrada entrada = (Entrada)o;
+        return ((this.Coste == entrada.getCoste()) && (this.Fecha.equals(entrada.getFecha())) && (this.NombreSerie.equals(entrada.getNombreSerie()))
+                && (this.NumeroTemporada == entrada.getNumeroTemporada()) && (this.NumeroCapitulo == entrada.getNumeroCapitulo()));
+    }
 }
