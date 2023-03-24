@@ -18,7 +18,7 @@ public class Temporada implements Comparable<Temporada>{
     @ManyToOne
     private Serie Serie;
 
-    @OneToMany
+    @OneToMany(mappedBy = "temporada")
     private Set<Capitulo> Capitulos;
 
     public Temporada(int NumTemporada, Serie Serie){

@@ -25,7 +25,7 @@ public class Factura implements Comparable<Factura>{
     @ManyToOne
     private Usuario Usuario;
 
-    @OneToMany
+    @OneToMany(mappedBy = "factura")
     private List<Entrada> EntradasFactura;
 
     public Factura(Usuario usuario, Date fecha){

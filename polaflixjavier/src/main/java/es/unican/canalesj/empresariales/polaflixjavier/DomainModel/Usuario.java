@@ -2,9 +2,8 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -34,10 +33,11 @@ public abstract class Usuario {
     @ManyToMany
     private Set<Serie> Terminadas;
 
-    @OneToMany
+    @OneToMany(mappedBy = "usuario")
     private SortedSet<Factura> Facturas;
 
-    private Map<Serie, Capitulo> UltimoCapitulo;
+    @OneToMany(mappedBy = "usuario")
+    private Set<Capitulo> CapitulosVistos;
 
     public Usuario(String Username, String Password, String IBAN){
 
@@ -51,12 +51,11 @@ public abstract class Usuario {
 
         Facturas = new TreeSet<Factura>();
 
-        UltimoCapitulo = new HashMap<Serie, Capitulo>();
+        CapitulosVistos = new HashSet<>();
     }
 
     public void verCapitulo(Capitulo cap){
-        Serie serie = cap.getTemporada().getSerie();
-        UltimoCapitulo.put(serie, cap);
+        CapitulosVistos.add(cap);
 
         Date fechaActual = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -136,4 +135,22 @@ public abstract class Usuario {
     }
     //#endregion
     
+    @Override
+    public int hashCode(){
+        return Objects.hash(Username, Password, IBAN);
+    }
+
+    @Override
+    public boolean equals(Object o){
+        if(o == this){
+            return true;
+        }
+
+        if(!(o instanceof Serie)){
+            return false;
+        }
+
+        Usuario usuario = (Usuario)o;
+        return ((this.Username.equals(usuario.getUsername())) && (this.Password.equals(usuario.getPassword())) && (this.IBAN.equals(usuario.getIBAN())));
+    }
 }

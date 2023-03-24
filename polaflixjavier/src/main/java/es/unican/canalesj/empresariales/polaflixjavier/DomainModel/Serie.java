@@ -24,7 +24,7 @@ public abstract class Serie {
     private char Inicial;
     private String Sinopsis;
 
-    @OneToMany
+    @OneToMany(mappedBy = "serie")
     private Set<Temporada> Temporadas;
 
     @ManyToMany

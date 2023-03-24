@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-PolaflixjavierApplication<polaflixjavier>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "es.unican.canalesj.empresariales.polaflixjavier.PolaflixjavierApplication",
+            "projectName": "polaflixjavier",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
