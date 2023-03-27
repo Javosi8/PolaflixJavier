@@ -33,10 +33,10 @@ public abstract class Usuario {
     @ManyToMany
     private Set<Serie> Terminadas;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "Usuario")
     private SortedSet<Factura> Facturas;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany
     private Set<Capitulo> CapitulosVistos;
 
     public Usuario(String Username, String Password, String IBAN){
@@ -121,6 +121,21 @@ public abstract class Usuario {
     public String getIBAN() {
         return IBAN;
     }
+    public Set<Serie> getEmpezadas() {
+        return Empezadas;
+    }
+    public Set<Serie> getPendientes() {
+        return Pendientes;
+    }
+    public Set<Serie> getTerminadas() {
+        return Terminadas;
+    }
+    public SortedSet<Factura> getFacturas() {
+        return Facturas;
+    }
+    public Set<Capitulo> getCapitulosVistos() {
+        return CapitulosVistos;
+    }
     //#endregion
 
     //#region Setters
@@ -133,11 +148,26 @@ public abstract class Usuario {
     public void setIBAN(String iBAN) {
         IBAN = iBAN;
     }
+    public void setEmpezadas(Set<Serie> empezadas) {
+        Empezadas = empezadas;
+    }
+    public void setPendientes(Set<Serie> pendientes) {
+        Pendientes = pendientes;
+    }
+    public void setTerminadas(Set<Serie> terminadas) {
+        Terminadas = terminadas;
+    }
+    public void setFacturas(SortedSet<Factura> facturas) {
+        Facturas = facturas;
+    }
+    public void setCapitulosVistos(Set<Capitulo> capitulosVistos) {
+        CapitulosVistos = capitulosVistos;
+    }
     //#endregion
-    
+
     @Override
     public int hashCode(){
-        return Objects.hash(Username, Password, IBAN);
+        return Objects.hash(Username, Password, IBAN, Empezadas, Pendientes, Terminadas, Facturas, CapitulosVistos);
     }
 
     @Override
@@ -151,6 +181,9 @@ public abstract class Usuario {
         }
 
         Usuario usuario = (Usuario)o;
-        return ((this.Username.equals(usuario.getUsername())) && (this.Password.equals(usuario.getPassword())) && (this.IBAN.equals(usuario.getIBAN())));
+        return ((this.Username.equals(usuario.getUsername())) && (this.Password.equals(usuario.getPassword()))
+                 && (this.IBAN.equals(usuario.getIBAN())) && (this.Pendientes.equals(usuario.getPendientes()))
+                 && (this.Empezadas.equals(usuario.getEmpezadas())) && (this.Terminadas.equals(usuario.Terminadas))
+                 && (this.CapitulosVistos.equals(usuario.getCapitulosVistos())) && (this.Facturas.equals(usuario.getFacturas())));
     }
 }

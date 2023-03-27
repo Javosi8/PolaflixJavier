@@ -7,6 +7,7 @@ import java.util.TreeSet;
 
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Inheritance;
 import jakarta.persistence.InheritanceType;
@@ -19,12 +20,14 @@ import jakarta.persistence.OneToMany;
 public abstract class Serie {
     
     @Id
-    private long id;
+    @GeneratedValue
+    private long Id;
+    
     private String Titulo;    
     private char Inicial;
     private String Sinopsis;
 
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "Serie")
     private Set<Temporada> Temporadas;
 
     @ManyToMany
@@ -64,6 +67,9 @@ public abstract class Serie {
     public Set<Creador> getCreadores() {
         return Creadores;
     }
+    public Set<Temporada> getTemporadas() {
+        return Temporadas;
+    }
     public abstract double getCoste();
     //#endregion
 
@@ -72,7 +78,6 @@ public abstract class Serie {
         Titulo = titulo;
         Inicial = titulo.charAt(0);
     }
-
     public void setSinopsis(String sinopsis) {
         Sinopsis = sinopsis;
     }
@@ -82,11 +87,14 @@ public abstract class Serie {
     public void setCreadores(Set<Creador> creadores) {
         Creadores = creadores;
     }
+    public void setTemporadas(Set<Temporada> temporadas) {
+        Temporadas = temporadas;
+    }
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(Titulo, Sinopsis);
+        return Objects.hash(Titulo, Inicial, Sinopsis, Actores, Creadores, Temporadas);
     }
 
     @Override
@@ -100,6 +108,8 @@ public abstract class Serie {
         }
 
         Serie serie = (Serie)o;
-        return (this.Titulo.equals(serie.getTitulo()) && (this.Sinopsis.equals(serie.getSinopsis())));
+        return (this.Titulo.equals(serie.getTitulo()) && (this.Sinopsis.equals(serie.getSinopsis()))
+        && (this.Actores.equals(serie.getActores())) && (this.Creadores.equals(serie.getCreadores()))
+        && (this.Temporadas.equals(serie.getTemporadas())));
     }
 }

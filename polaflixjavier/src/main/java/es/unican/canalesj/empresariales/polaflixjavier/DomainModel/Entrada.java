@@ -4,15 +4,9 @@ import java.util.Date;
 import java.util.Objects;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
 
 @Embeddable
 public class Entrada {
-    
-    @Id
-    @GeneratedValue
-    private long id;
 
     private double Coste;
     private Date Fecha;

@@ -3,6 +3,7 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 
@@ -10,6 +11,9 @@ import jakarta.persistence.ManyToOne;
 public class Capitulo implements Comparable<Capitulo>{
     
     @Id
+    @GeneratedValue
+    private long Id;
+
     private int NumCapitulo;
     private int Duracion;
     private String Descripcion;
@@ -73,7 +77,7 @@ public class Capitulo implements Comparable<Capitulo>{
 
     @Override
     public int hashCode(){
-        return Objects.hash(NumCapitulo, Duracion, Descripcion, Titulo, Enlace);
+        return Objects.hash(NumCapitulo, Duracion, Descripcion, Titulo, Enlace, Temporada);
     }
 
     @Override
@@ -88,7 +92,8 @@ public class Capitulo implements Comparable<Capitulo>{
 
         Capitulo capitulo = (Capitulo)o;
         return ((this.NumCapitulo == capitulo.getNumCapitulo()) && (this.Titulo.equals(capitulo.getTitulo()))
-        && (this.Duracion == capitulo.getDuracion()) && (this.Temporada.equals(capitulo.getTemporada())));
+        && (this.Duracion == capitulo.getDuracion()) && (this.Temporada.equals(capitulo.getTemporada()))
+        && (this.Enlace.equals(capitulo.getEnlace())) && (this.Descripcion.equals(capitulo.getDescripcion())));
     }
 
     @Override

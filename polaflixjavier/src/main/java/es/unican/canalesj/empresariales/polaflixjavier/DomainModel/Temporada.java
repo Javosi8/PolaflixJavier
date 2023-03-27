@@ -5,6 +5,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
@@ -13,12 +14,15 @@ import jakarta.persistence.OneToMany;
 public class Temporada implements Comparable<Temporada>{
     
     @Id
+    @GeneratedValue
+    private long Id;
+
     private int NumTemporada;
 
     @ManyToOne
     private Serie Serie;
 
-    @OneToMany(mappedBy = "temporada")
+    @OneToMany(mappedBy = "Temporada")
     private Set<Capitulo> Capitulos;
 
     public Temporada(int NumTemporada, Serie Serie){
@@ -62,7 +66,7 @@ public class Temporada implements Comparable<Temporada>{
     
     @Override
     public int hashCode(){
-        return Objects.hash(NumTemporada, Serie);
+        return Objects.hash(NumTemporada, Serie, Capitulos);
     }
 
     @Override
@@ -76,7 +80,8 @@ public class Temporada implements Comparable<Temporada>{
         }
 
         Temporada temporada = (Temporada)o;
-        return ((this.Serie.equals(temporada.getSerie())) && (this.NumTemporada == temporada.getNumTemporada()));
+        return ((this.Serie.equals(temporada.getSerie())) && (this.NumTemporada == temporada.getNumTemporada())
+                && (this.Capitulos.equals(temporada.getCapitulos())));
     }
 
     @Override

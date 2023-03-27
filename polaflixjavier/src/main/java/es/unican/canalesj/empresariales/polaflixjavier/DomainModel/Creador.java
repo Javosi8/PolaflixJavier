@@ -11,7 +11,7 @@ public class Creador {
 
     @Id
     @GeneratedValue
-    private long id;
+    private long Id;
     
     private String Nombre;
     private String Apellido;

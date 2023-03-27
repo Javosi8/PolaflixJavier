@@ -6,18 +6,18 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 
 @Entity
 public class Factura implements Comparable<Factura>{
     
     @Id
     @GeneratedValue
-    private long id;
+    private long Id;
 
     private double CosteTotal;
     private Date Fecha;
@@ -25,7 +25,7 @@ public class Factura implements Comparable<Factura>{
     @ManyToOne
     private Usuario Usuario;
 
-    @OneToMany(mappedBy = "factura")
+    @ElementCollection
     private List<Entrada> EntradasFactura;
 
     public Factura(Usuario usuario, Date fecha){
@@ -71,7 +71,6 @@ public class Factura implements Comparable<Factura>{
     public void setCosteTotal(double costeTotal) {
         CosteTotal = costeTotal;
     }
-
     public void setFecha(Date fecha) {
         Fecha = fecha;
     }
@@ -82,7 +81,7 @@ public class Factura implements Comparable<Factura>{
 
     @Override
     public int hashCode(){
-        return Objects.hash(CosteTotal, Fecha);
+        return Objects.hash(CosteTotal, Fecha, Usuario);
     }
 
     @Override
@@ -105,7 +104,7 @@ public class Factura implements Comparable<Factura>{
             return 1;
         } else if(this.getAño() < factura.getAño()){
             return -1;
-        } else if(this.getAño() == factura.getAño()){
+        } else {
             if(this.getMes() > factura.getMes()){
                 return 1;
             }else if(this.getMes() < factura.getMes()){
