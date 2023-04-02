@@ -7,6 +7,10 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue(value="Normal")
 public class UsuarioNormal extends Usuario {
     
+    protected UsuarioNormal(){
+        super();
+    }
+
     public UsuarioNormal(String Username, String Password, String IBAN){
         super(Username, Password, IBAN);
     }

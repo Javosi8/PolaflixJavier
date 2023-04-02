@@ -28,6 +28,10 @@ public class Factura implements Comparable<Factura>{
     @ElementCollection
     private List<Entrada> EntradasFactura;
 
+    protected Factura(){
+        
+    }
+
     public Factura(Usuario usuario, Date fecha){
         this.CosteTotal = 0;
         this.Fecha = fecha;

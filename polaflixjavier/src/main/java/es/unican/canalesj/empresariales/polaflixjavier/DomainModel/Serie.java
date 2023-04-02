@@ -36,6 +36,10 @@ public abstract class Serie {
     @ManyToMany
     private Set<Creador> Creadores;
 
+    protected Serie(){
+        
+    }
+
     public Serie(String Titulo, String Sinopsis){
         this.Titulo = Titulo;
         this.Inicial = Titulo.charAt(0);

@@ -39,6 +39,10 @@ public abstract class Usuario {
     @OneToMany
     private Set<Capitulo> CapitulosVistos;
 
+    protected Usuario(){
+        
+    }
+
     public Usuario(String Username, String Password, String IBAN){
 
         this.Username = Username;

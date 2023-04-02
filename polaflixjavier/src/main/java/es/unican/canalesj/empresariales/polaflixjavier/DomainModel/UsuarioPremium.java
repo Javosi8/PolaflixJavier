@@ -9,6 +9,10 @@ public class UsuarioPremium extends Usuario{
     
     private final double Cuota = 20.0;
 
+    protected UsuarioPremium(){
+        super();
+    }
+
     public UsuarioPremium(String Username, String Password, String IBAN){
         super(Username, Password, IBAN);
     }

@@ -14,6 +14,10 @@ public class Entrada {
     private int NumeroTemporada;
     private int NumeroCapitulo;
 
+    protected Entrada(){
+        
+    }
+
     public Entrada(double coste, Date fecha, String nombreSerie, int numeroTemporada, int numeroCapitulo){
         this.Coste = coste;
         this.Fecha = fecha;

@@ -25,6 +25,10 @@ public class Temporada implements Comparable<Temporada>{
     @OneToMany(mappedBy = "Temporada")
     private Set<Capitulo> Capitulos;
 
+    protected Temporada(){
+        
+    }
+
     public Temporada(int NumTemporada, Serie Serie){
         this.NumTemporada = NumTemporada;
         this.Serie = Serie;

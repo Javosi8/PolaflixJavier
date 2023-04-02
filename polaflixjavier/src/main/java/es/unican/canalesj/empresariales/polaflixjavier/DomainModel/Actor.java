@@ -16,6 +16,10 @@ public class Actor {
     private String Nombre;
     private String Apellido;
 
+    protected Actor(){
+        
+    }
+
     public Actor(String Nombre, String Apellido){
         this.Nombre = Nombre;
         this.Apellido = Apellido;

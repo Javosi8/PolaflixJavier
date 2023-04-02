@@ -23,6 +23,10 @@ public class Capitulo implements Comparable<Capitulo>{
     @ManyToOne
     private Temporada Temporada;
 
+    protected Capitulo(){
+        
+    }
+
     public Capitulo(int NumCapitulo, String Titulo, String Descripcion, int Duracion, String Enlace, Temporada Temporada){
         this.NumCapitulo = NumCapitulo;
         this.Titulo = Titulo;

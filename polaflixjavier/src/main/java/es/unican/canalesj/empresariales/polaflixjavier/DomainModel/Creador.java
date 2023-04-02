@@ -15,6 +15,10 @@ public class Creador {
     
     private String Nombre;
     private String Apellido;
+
+    protected Creador(){
+        
+    }
     
     public Creador(String Nombre, String Apellido){
         this.Nombre = Nombre;

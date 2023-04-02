@@ -9,6 +9,10 @@ public class Gold extends Serie{
 
     private final double Coste = 1.5;
 
+    protected Gold(){
+        super();
+    }
+
     public Gold(String Titulo, String Sinopsis){
         super(Titulo, Sinopsis);
     }
