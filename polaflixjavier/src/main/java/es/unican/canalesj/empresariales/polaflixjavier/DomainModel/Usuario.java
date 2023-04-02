@@ -17,7 +17,7 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 
 @Entity
-@DiscriminatorColumn(name="tipo")
+@DiscriminatorColumn(name="Tipo")
 @Inheritance(strategy=InheritanceType.SINGLE_TABLE)
 public abstract class Usuario {
     
