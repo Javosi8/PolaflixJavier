@@ -11,43 +11,43 @@ public class Actor {
     
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
     
-    private String Nombre;
-    private String Apellido;
+    private String nombre;
+    private String apellido;
 
     protected Actor(){
         
     }
 
-    public Actor(String Nombre, String Apellido){
-        this.Nombre = Nombre;
-        this.Apellido = Apellido;
+    public Actor(String nombre, String apellido){
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     //#region Getters
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
 
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
     //#endregion
 
     //#region Setters
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
 
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
     //#endregion
     
     @Override
     public int hashCode(){
-        return Objects.hash(Nombre, Apellido);
+        return Objects.hash(nombre, apellido);
     }
 
     @Override
@@ -60,6 +60,6 @@ public class Actor {
         }
 
         Actor actor = (Actor) o;
-        return (this.Nombre.equals(actor.getNombre())) && (this.Apellido.equals(actor.getApellido()));
+        return (this.nombre.equals(actor.getNombre())) && (this.apellido.equals(actor.getApellido()));
     }
 }

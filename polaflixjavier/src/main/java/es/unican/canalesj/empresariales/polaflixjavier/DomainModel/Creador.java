@@ -11,41 +11,41 @@ public class Creador {
 
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
     
-    private String Nombre;
-    private String Apellido;
+    private String nombre;
+    private String apellido;
 
     protected Creador(){
         
     }
     
-    public Creador(String Nombre, String Apellido){
-        this.Nombre = Nombre;
-        this.Apellido = Apellido;
+    public Creador(String nombre, String apellido){
+        this.nombre = nombre;
+        this.apellido = apellido;
     }
 
     //#region Getters
     public String getNombre() {
-        return Nombre;
+        return nombre;
     }
     public String getApellido() {
-        return Apellido;
+        return apellido;
     }
     //#endregion
     
     //#region Setters
     public void setNombre(String nombre) {
-        Nombre = nombre;
+        this.nombre = nombre;
     }
     public void setApellido(String apellido) {
-        Apellido = apellido;
+        this.apellido = apellido;
     }
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(Nombre, Apellido);
+        return Objects.hash(nombre, apellido);
     }
 
     @Override
@@ -58,6 +58,6 @@ public class Creador {
         }
 
         Creador creador = (Creador) o;
-        return (this.Nombre.equals(creador.getNombre())) && (this.Apellido.equals(creador.getApellido()));
+        return (this.nombre.equals(creador.getNombre())) && (this.apellido.equals(creador.getApellido()));
     }
 }

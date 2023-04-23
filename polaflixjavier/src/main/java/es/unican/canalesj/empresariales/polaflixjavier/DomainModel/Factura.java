@@ -17,27 +17,27 @@ public class Factura implements Comparable<Factura>{
     
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
 
-    private double CosteTotal;
-    private Date Fecha;
+    private double costeTotal;
+    private Date fecha;
 
     @ManyToOne
-    private Usuario Usuario;
+    private Usuario usuario;
 
     @ElementCollection
-    private List<Entrada> EntradasFactura;
+    private List<Entrada> entradasFactura;
 
     protected Factura(){
         
     }
 
     public Factura(Usuario usuario, Date fecha){
-        this.CosteTotal = 0;
-        this.Fecha = fecha;
-        this.Usuario = usuario;
+        this.costeTotal = 0;
+        this.fecha = fecha;
+        this.usuario = usuario;
 
-        EntradasFactura = new ArrayList<Entrada>();
+        entradasFactura = new ArrayList<Entrada>();
     }
 
     public void agregarEntrada(Capitulo cap, Date fecha){
@@ -45,47 +45,47 @@ public class Factura implements Comparable<Factura>{
         String nombreSerie = cap.getTemporada().getSerie().getTitulo();
         int numTemporada = cap.getTemporada().getNumTemporada();
         int numCapitulo = cap.getNumCapitulo();
-        EntradasFactura.add(new Entrada(coste, fecha, nombreSerie, numTemporada, numCapitulo));
-        this.CosteTotal += coste;
+        entradasFactura.add(new Entrada(coste, fecha, nombreSerie, numTemporada, numCapitulo));
+        this.costeTotal += coste;
     }
 
     //#region Getters
     public double getCosteTotal() {
-        return CosteTotal;
+        return costeTotal;
     }
     public Date getFecha() {
-        return Fecha;
+        return fecha;
     }
     public Usuario getUsuario() {
-        return Usuario;
+        return usuario;
     }
     public int getMes(){
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this.Fecha);
+        calendar.setTime(this.fecha);
         return calendar.get(Calendar.MONTH);
     }
     public int getAño(){
         Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this.Fecha);
+        calendar.setTime(this.fecha);
         return calendar.get(Calendar.YEAR);
     }
     //#endregion
 
     //#region Setters
     public void setCosteTotal(double costeTotal) {
-        CosteTotal = costeTotal;
+        this.costeTotal = costeTotal;
     }
     public void setFecha(Date fecha) {
-        Fecha = fecha;
+        this.fecha = fecha;
     }
     public void setUsuario(Usuario usuario) {
-        Usuario = usuario;
+        this.usuario = usuario;
     }
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(CosteTotal, Fecha, Usuario);
+        return Objects.hash(costeTotal, fecha, usuario);
     }
 
     @Override
@@ -98,8 +98,8 @@ public class Factura implements Comparable<Factura>{
         }
 
         Factura factura = (Factura)o;
-        return (this.CosteTotal == factura.getCosteTotal()) && (this.getMes() == factura.getMes()) 
-        && (this.getAño() == factura.getAño()) && (this.Usuario.equals(factura.getUsuario()));
+        return (this.costeTotal == factura.getCosteTotal()) && (this.getMes() == factura.getMes()) 
+        && (this.getAño() == factura.getAño()) && (this.usuario.equals(factura.getUsuario()));
     }
 
     @Override

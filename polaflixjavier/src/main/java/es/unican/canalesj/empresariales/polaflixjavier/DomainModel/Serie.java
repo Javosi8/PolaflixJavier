@@ -3,6 +3,7 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import jakarta.persistence.DiscriminatorColumn;
@@ -21,84 +22,84 @@ public abstract class Serie {
     
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
     
-    private String Titulo;    
-    private char Inicial;
-    private String Sinopsis;
+    private String titulo;    
+    private char inicial;
+    private String sinopsis;
 
-    @OneToMany(mappedBy = "Serie")
-    private Set<Temporada> Temporadas;
-
-    @ManyToMany
-    private Set<Actor> Actores;
+    @OneToMany(mappedBy = "serie")
+    private SortedSet<Temporada> temporadas;
 
     @ManyToMany
-    private Set<Creador> Creadores;
+    private Set<Actor> actores;
+
+    @ManyToMany
+    private Set<Creador> creadores;
 
     protected Serie(){
         
     }
 
-    public Serie(String Titulo, String Sinopsis){
-        this.Titulo = Titulo;
-        this.Inicial = Titulo.charAt(0);
-        this.Sinopsis = Sinopsis;
+    public Serie(String titulo, String sinopsis){
+        this.titulo = titulo;
+        this.inicial = titulo.charAt(0);
+        this.sinopsis = sinopsis;
 
-        Actores = new HashSet<Actor>();
-        Creadores = new HashSet<Creador>();
+        actores = new HashSet<Actor>();
+        creadores = new HashSet<Creador>();
         
-        Temporadas = new TreeSet<Temporada>();
+        temporadas = new TreeSet<Temporada>();
     }
 
     public Temporada getTemporadaById(int id){
-        return Temporadas.stream().filter(t -> t.getNumTemporada() == id).findFirst().get();
+        return temporadas.stream().filter(t -> t.getNumTemporada() == id).findFirst().get();
     }
 
     //#region Getters
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
     public char getInicial() {
-        return Inicial;
+        return inicial;
     }
     public String getSinopsis() {
-        return Sinopsis;
+        return sinopsis;
     }
     public Set<Actor> getActores() {
-        return Actores;
+        return actores;
     }
     public Set<Creador> getCreadores() {
-        return Creadores;
+        return creadores;
     }
-    public Set<Temporada> getTemporadas() {
-        return Temporadas;
+    public SortedSet<Temporada> getTemporadas() {
+        return temporadas;
     }
     public abstract double getCoste();
     //#endregion
 
     //#region Setters
     public void setTitulo(String titulo) {
-        Titulo = titulo;
-        Inicial = titulo.charAt(0);
+        this.titulo = titulo;
+        inicial = titulo.charAt(0);
     }
     public void setSinopsis(String sinopsis) {
-        Sinopsis = sinopsis;
+        this.sinopsis = sinopsis;
     }
     public void setActores(Set<Actor> actores) {
-        Actores = actores;
+        this.actores = actores;
     }
     public void setCreadores(Set<Creador> creadores) {
-        Creadores = creadores;
+        this.creadores = creadores;
     }
-    public void setTemporadas(Set<Temporada> temporadas) {
-        Temporadas = temporadas;
+    public void setTemporadas(SortedSet<Temporada> temporadas) {
+        this.temporadas = temporadas;
     }
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(Titulo, Inicial, Sinopsis, Actores, Creadores, Temporadas);
+        return Objects.hash(titulo, inicial, sinopsis, actores, creadores, temporadas);
     }
 
     @Override
@@ -112,8 +113,8 @@ public abstract class Serie {
         }
 
         Serie serie = (Serie)o;
-        return (this.Titulo.equals(serie.getTitulo()) && (this.Sinopsis.equals(serie.getSinopsis()))
-        && (this.Actores.equals(serie.getActores())) && (this.Creadores.equals(serie.getCreadores()))
-        && (this.Temporadas.equals(serie.getTemporadas())));
+        return (this.titulo.equals(serie.getTitulo()) && (this.sinopsis.equals(serie.getSinopsis()))
+        && (this.actores.equals(serie.getActores())) && (this.creadores.equals(serie.getCreadores()))
+        && (this.temporadas.equals(serie.getTemporadas())));
     }
 }

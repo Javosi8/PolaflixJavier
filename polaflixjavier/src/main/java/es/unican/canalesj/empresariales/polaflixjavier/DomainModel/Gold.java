@@ -7,19 +7,19 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue(value="Gold")
 public class Gold extends Serie{
 
-    private final double Coste = 1.5;
+    private final double coste = 1.5;
 
     protected Gold(){
         super();
     }
 
-    public Gold(String Titulo, String Sinopsis){
-        super(Titulo, Sinopsis);
+    public Gold(String titulo, String sinopsis){
+        super(titulo, sinopsis);
     }
 
     @Override
     public double getCoste() {
-        return Coste;
+        return coste;
     }
     
 }

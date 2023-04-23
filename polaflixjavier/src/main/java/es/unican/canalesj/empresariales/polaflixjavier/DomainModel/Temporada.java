@@ -1,7 +1,7 @@
 package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 
 import java.util.Objects;
-import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 import jakarta.persistence.Entity;
@@ -15,62 +15,62 @@ public class Temporada implements Comparable<Temporada>{
     
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
 
-    private int NumTemporada;
+    private int numTemporada;
 
     @ManyToOne
-    private Serie Serie;
+    private Serie serie;
 
-    @OneToMany(mappedBy = "Temporada")
-    private Set<Capitulo> Capitulos;
+    @OneToMany(mappedBy = "temporada")
+    private SortedSet<Capitulo> capitulos;
 
     protected Temporada(){
         
     }
 
-    public Temporada(int NumTemporada, Serie Serie){
-        this.NumTemporada = NumTemporada;
-        this.Serie = Serie;
+    public Temporada(int numTemporada, Serie serie){
+        this.numTemporada = numTemporada;
+        this.serie = serie;
 
-        Capitulos = new TreeSet<Capitulo>();
+        capitulos = new TreeSet<Capitulo>();
     }
 
     public void agregarCapitulo(Capitulo capitulo){
-        Capitulos.add(capitulo);
+        capitulos.add(capitulo);
     }
 
     public Capitulo getCapituloById(int numCapitulo){
-        return Capitulos.stream().filter(c -> c.getNumCapitulo() == numCapitulo).findFirst().get();
+        return capitulos.stream().filter(c -> c.getNumCapitulo() == numCapitulo).findFirst().get();
     }
 
     //#region Getters
     public int getNumTemporada() {
-        return NumTemporada;
+        return numTemporada;
     }
     public Serie getSerie() {
-        return Serie;
+        return serie;
     }
-    public Set<Capitulo> getCapitulos() {
-        return Capitulos;
+    public SortedSet<Capitulo> getCapitulos() {
+        return capitulos;
     }
     //#endregion
 
     //#region Setters
     public void setNumTemporada(int numTemporada) {
-        NumTemporada = numTemporada;
+        this.numTemporada = numTemporada;
     }
     public void setSerie(Serie serie) {
-        Serie = serie;
+        this.serie = serie;
     }
-    public void setCapitulos(Set<Capitulo> capitulos) {
-        Capitulos = capitulos;
+    public void setCapitulos(SortedSet<Capitulo> capitulos) {
+        this.capitulos = capitulos;
     }
     //#endregion
     
     @Override
     public int hashCode(){
-        return Objects.hash(NumTemporada, Serie, Capitulos);
+        return Objects.hash(numTemporada, serie, capitulos);
     }
 
     @Override
@@ -84,16 +84,16 @@ public class Temporada implements Comparable<Temporada>{
         }
 
         Temporada temporada = (Temporada)o;
-        return ((this.Serie.equals(temporada.getSerie())) && (this.NumTemporada == temporada.getNumTemporada())
-                && (this.Capitulos.equals(temporada.getCapitulos())));
+        return ((this.serie.equals(temporada.getSerie())) && (this.numTemporada == temporada.getNumTemporada())
+                && (this.capitulos.equals(temporada.getCapitulos())));
     }
 
     @Override
     public int compareTo(Temporada temporada){
-        if(this.getNumTemporada() > temporada.getNumTemporada()){
+        if(this.numTemporada > temporada.getNumTemporada()){
             return 1;
         }
-        if(this.getNumTemporada() < temporada.getNumTemporada()){
+        if(this.numTemporada < temporada.getNumTemporada()){
             return -1;
         }
         return 0;

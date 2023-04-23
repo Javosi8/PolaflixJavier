@@ -7,19 +7,19 @@ import jakarta.persistence.Entity;
 @DiscriminatorValue(value="Silver")
 public class Silver extends Serie{
     
-    private final double Coste = 0.75;
+    private final double coste = 0.75;
 
     protected Silver(){
         super();
     }
     
-    public Silver(String Titulo, String Sinopsis){
-        super(Titulo, Sinopsis);
+    public Silver(String titulo, String sinopsis){
+        super(titulo, sinopsis);
     }
 
     @Override
     public double getCoste() {
-        return Coste;
+        return coste;
     }
     
 }

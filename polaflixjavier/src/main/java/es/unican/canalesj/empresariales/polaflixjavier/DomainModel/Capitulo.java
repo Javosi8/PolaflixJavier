@@ -12,76 +12,76 @@ public class Capitulo implements Comparable<Capitulo>{
     
     @Id
     @GeneratedValue
-    private long Id;
+    private long id;
 
-    private int NumCapitulo;
-    private int Duracion;
-    private String Descripcion;
-    private String Titulo;
-    private String Enlace;
+    private int numCapitulo;
+    private int duracion;
+    private String descripcion;
+    private String titulo;
+    private String enlace;
 
     @ManyToOne
-    private Temporada Temporada;
+    private Temporada temporada;
 
     protected Capitulo(){
         
     }
 
-    public Capitulo(int NumCapitulo, String Titulo, String Descripcion, int Duracion, String Enlace, Temporada Temporada){
-        this.NumCapitulo = NumCapitulo;
-        this.Titulo = Titulo;
-        this.Descripcion = Descripcion;
-        this.Duracion = Duracion;
-        this.Enlace = Enlace;
-        this.Temporada = Temporada;
+    public Capitulo(int numCapitulo, String titulo, String descripcion, int duracion, String enlace, Temporada temporada){
+        this.numCapitulo = numCapitulo;
+        this.titulo = titulo;
+        this.descripcion = descripcion;
+        this.duracion = duracion;
+        this.enlace = enlace;
+        this.temporada = temporada;
     }
     
     //#region Getters
     public int getDuracion() {
-        return Duracion;
+        return duracion;
     }
     public String getDescripcion() {
-        return Descripcion;
+        return descripcion;
     }
     public int getNumCapitulo() {
-        return NumCapitulo;
+        return numCapitulo;
     }
     public String getTitulo() {
-        return Titulo;
+        return titulo;
     }
     public String getEnlace() {
-        return Enlace;
+        return enlace;
     }
     public Temporada getTemporada() {
-        return Temporada;
+        return temporada;
     }
     //#endregion
         
     //#region Setters
     public void setDuracion(int duracion) {
-        this.Duracion = duracion;
+        this.duracion = duracion;
     }
     public void setDescripcion(String descripcion) {
-        Descripcion = descripcion;
+        this.descripcion = descripcion;
     }
     public void setNumCapitulo(int numCapitulo) {
-        NumCapitulo = numCapitulo;
+        this.numCapitulo = numCapitulo;
     }
     public void setTitulo(String titulo) {
-        Titulo = titulo;
+        this.titulo = titulo;
     }
     public void setEnlace(String enlace) {
-        Enlace = enlace;
+        this.enlace = enlace;
     }
     public void setTemporada(Temporada temporada) {
-        Temporada = temporada;
+        this.temporada = temporada;
     }
     
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(NumCapitulo, Duracion, Descripcion, Titulo, Enlace, Temporada);
+        return Objects.hash(numCapitulo, titulo, enlace, temporada);
     }
 
     @Override
@@ -95,17 +95,16 @@ public class Capitulo implements Comparable<Capitulo>{
         }
 
         Capitulo capitulo = (Capitulo)o;
-        return ((this.NumCapitulo == capitulo.getNumCapitulo()) && (this.Titulo.equals(capitulo.getTitulo()))
-        && (this.Duracion == capitulo.getDuracion()) && (this.Temporada.equals(capitulo.getTemporada()))
-        && (this.Enlace.equals(capitulo.getEnlace())) && (this.Descripcion.equals(capitulo.getDescripcion())));
+        return ((this.numCapitulo == capitulo.getNumCapitulo()) && (this.titulo.equals(capitulo.getTitulo()))
+        && (this.temporada.equals(capitulo.getTemporada())) && (this.enlace.equals(capitulo.getEnlace())));
     }
 
     @Override
     public int compareTo(Capitulo capitulo){
-        if(this.NumCapitulo > capitulo.getNumCapitulo()){
+        if(this.numCapitulo > capitulo.getNumCapitulo()){
             return 1;
         }
-        if(this.NumCapitulo < capitulo.getNumCapitulo()){
+        if(this.numCapitulo < capitulo.getNumCapitulo()){
             return -1;
         }
         return 0;

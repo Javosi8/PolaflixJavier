@@ -11,8 +11,8 @@ public class UsuarioNormal extends Usuario {
         super();
     }
 
-    public UsuarioNormal(String Username, String Password, String IBAN){
-        super(Username, Password, IBAN);
+    public UsuarioNormal(String username, String password, String iban){
+        super(username, password, iban);
     }
 
 }

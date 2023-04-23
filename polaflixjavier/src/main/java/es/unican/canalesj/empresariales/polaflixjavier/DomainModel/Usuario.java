@@ -22,44 +22,44 @@ import jakarta.persistence.OneToMany;
 public abstract class Usuario {
     
     @Id
-    private String Username;
-    private String Password;
-    private String IBAN;
+    private String username;
+    private String password;
+    private String iban;
 
     @ManyToMany
-    private Set<Serie> Empezadas;
+    private Set<Serie> empezadas;
     @ManyToMany
-    private Set<Serie> Pendientes;
+    private Set<Serie> pendientes;
     @ManyToMany
-    private Set<Serie> Terminadas;
+    private Set<Serie> terminadas;
 
-    @OneToMany(mappedBy = "Usuario")
-    private SortedSet<Factura> Facturas;
+    @OneToMany(mappedBy = "usuario")
+    private SortedSet<Factura> facturas;
 
     @OneToMany
-    private Set<Capitulo> CapitulosVistos;
+    private Set<Capitulo> capitulosVistos;
 
     protected Usuario(){
         
     }
 
-    public Usuario(String Username, String Password, String IBAN){
+    public Usuario(String username, String password, String iban){
 
-        this.Username = Username;
-        this.Password = Password;
-        this.IBAN = IBAN;
+        this.username = username;
+        this.password = password;
+        this.iban = iban;
 
-        Empezadas = new HashSet<Serie>();
-        Pendientes = new HashSet<Serie>();
-        Terminadas = new HashSet<Serie>();
+        empezadas = new HashSet<Serie>();
+        pendientes = new HashSet<Serie>();
+        terminadas = new HashSet<Serie>();
 
-        Facturas = new TreeSet<Factura>();
+        facturas = new TreeSet<Factura>();
 
-        CapitulosVistos = new HashSet<>();
+        capitulosVistos = new HashSet<>();
     }
 
     public void verCapitulo(Capitulo cap){
-        CapitulosVistos.add(cap);
+        capitulosVistos.add(cap);
 
         Date fechaActual = new Date();
         Calendar calendar = Calendar.getInstance();
@@ -67,111 +67,112 @@ public abstract class Usuario {
         int mes = calendar.get(Calendar.MONTH);
         int año = calendar.get(Calendar.YEAR);
 
-        Factura facturaVigente = Facturas.last();
+        Factura facturaVigente = facturas.last();
         if((facturaVigente.getMes() == mes) && (facturaVigente.getAño() == año)){
             facturaVigente.agregarEntrada(cap, fechaActual);
         } else {
             Factura nuevaFactura = new Factura(this, fechaActual);
             nuevaFactura.agregarEntrada(cap, fechaActual);
-            Facturas.add(facturaVigente);
+            facturas.add(facturaVigente);
         }
-        
+        if(!empezadas.contains(cap.getTemporada().getSerie())){
+            agregarSerieAEmpezadas(cap.getTemporada().getSerie());
+        }
+
+        if(cap.getTemporada().getSerie().getTemporadas().last().getCapitulos().last().getNumCapitulo() == cap.getNumCapitulo()){
+            agregarSerieATerminadas(cap.getTemporada().getSerie());
+        }
+
     }
 
     public void agregarSerieAPendientes(Serie serie){
-        if(Terminadas.contains(serie)){
-            Terminadas.remove(serie);
-        }
-
-        if(Empezadas.contains(serie)){
-            Empezadas.remove(serie);
-        }
-        
-        Pendientes.add(serie);
+        if((!terminadas.contains(serie)) && (!empezadas.contains(serie))){
+            pendientes.add(serie);
+        }        
     }
 
     public void agregarSerieAEmpezadas(Serie serie){
-        if(Terminadas.contains(serie)){
-            Terminadas.remove(serie);
+        if(terminadas.contains(serie)){
+            terminadas.remove(serie);
         }
 
-        if(Pendientes.contains(serie)){
-            Pendientes.remove(serie);
+        if(pendientes.contains(serie)){
+            pendientes.remove(serie);
         }
         
-        Empezadas.add(serie);
+        empezadas.add(serie);
     }
 
     public void agregarSerieATerminadas(Serie serie){
-        if(Pendientes.contains(serie)){
-            Pendientes.remove(serie);
+        if(pendientes.contains(serie)){
+            pendientes.remove(serie);
         }
 
-        if(Empezadas.contains(serie)){
-            Empezadas.remove(serie);
+        if(empezadas.contains(serie)){
+            empezadas.remove(serie);
         }
         
-        Terminadas.add(serie);
+        terminadas.add(serie);
     }
 
 
     //#region Getters
     public String getUsername() {
-        return Username;
+        return username;
     }
     public String getPassword() {
-        return Password;
+        return password;
     }
     public String getIBAN() {
-        return IBAN;
+        return iban;
     }
     public Set<Serie> getEmpezadas() {
-        return Empezadas;
+        return empezadas;
     }
     public Set<Serie> getPendientes() {
-        return Pendientes;
+        return pendientes;
     }
     public Set<Serie> getTerminadas() {
-        return Terminadas;
+        return terminadas;
     }
     public SortedSet<Factura> getFacturas() {
-        return Facturas;
+        return facturas;
     }
     public Set<Capitulo> getCapitulosVistos() {
-        return CapitulosVistos;
+        return capitulosVistos;
     }
     //#endregion
 
     //#region Setters
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
     public void setPassword(String password) {
-        Password = password;
+        this.password = password;
     }
-    public void setIBAN(String iBAN) {
-        IBAN = iBAN;
+    public void setIBAN(String iban) {
+        this.iban = iban;
     }
     public void setEmpezadas(Set<Serie> empezadas) {
-        Empezadas = empezadas;
+        this.empezadas = empezadas;
     }
     public void setPendientes(Set<Serie> pendientes) {
-        Pendientes = pendientes;
+        this.pendientes = pendientes;
     }
     public void setTerminadas(Set<Serie> terminadas) {
-        Terminadas = terminadas;
+        this.terminadas = terminadas;
     }
     public void setFacturas(SortedSet<Factura> facturas) {
-        Facturas = facturas;
+        this.facturas = facturas;
     }
     public void setCapitulosVistos(Set<Capitulo> capitulosVistos) {
-        CapitulosVistos = capitulosVistos;
+        this.capitulosVistos = capitulosVistos;
     }
     //#endregion
 
     @Override
     public int hashCode(){
-        return Objects.hash(Username, Password, IBAN, Empezadas, Pendientes, Terminadas, Facturas, CapitulosVistos);
+        return Objects.hash(username, password, iban, empezadas, pendientes, terminadas, facturas, capitulosVistos);
     }
 
     @Override
@@ -185,9 +186,9 @@ public abstract class Usuario {
         }
 
         Usuario usuario = (Usuario)o;
-        return ((this.Username.equals(usuario.getUsername())) && (this.Password.equals(usuario.getPassword()))
-                 && (this.IBAN.equals(usuario.getIBAN())) && (this.Pendientes.equals(usuario.getPendientes()))
-                 && (this.Empezadas.equals(usuario.getEmpezadas())) && (this.Terminadas.equals(usuario.Terminadas))
-                 && (this.CapitulosVistos.equals(usuario.getCapitulosVistos())) && (this.Facturas.equals(usuario.getFacturas())));
+        return ((this.username.equals(usuario.getUsername())) && (this.password.equals(usuario.getPassword()))
+                 && (this.iban.equals(usuario.getIBAN())) && (this.pendientes.equals(usuario.getPendientes()))
+                 && (this.empezadas.equals(usuario.getEmpezadas())) && (this.terminadas.equals(usuario.getTerminadas()))
+                 && (this.capitulosVistos.equals(usuario.getCapitulosVistos())) && (this.facturas.equals(usuario.getFacturas())));
     }
 }
