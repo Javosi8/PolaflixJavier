@@ -4,6 +4,10 @@ import java.util.Objects;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -20,9 +24,11 @@ public class Temporada implements Comparable<Temporada>{
     private int numTemporada;
 
     @ManyToOne
+    @JsonBackReference
     private Serie serie;
 
-    @OneToMany(mappedBy = "temporada")
+    @OneToMany(mappedBy = "temporada", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private SortedSet<Capitulo> capitulos;
 
     protected Temporada(){
@@ -70,7 +76,7 @@ public class Temporada implements Comparable<Temporada>{
     
     @Override
     public int hashCode(){
-        return Objects.hash(numTemporada, serie, capitulos);
+        return Objects.hash(numTemporada, serie);
     }
 
     @Override

@@ -26,4 +26,8 @@ public class SerieService {
     public List<Serie> getSerieByInicial(char inicial){
         return sr.findByInicial(inicial);
     }
+
+    public List<Serie> getSerieByTitulo(String titulo){
+        return sr.findByTitulo(titulo);
+    }
 }

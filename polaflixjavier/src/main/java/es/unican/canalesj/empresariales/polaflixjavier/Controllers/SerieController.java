@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Serie;
@@ -25,7 +26,7 @@ public class SerieController {
         List<Serie> series = ss.getSeries();
         ResponseEntity<List<Serie>> result;
         if(series.isEmpty())
-            result = ResponseEntity.notFound().build();
+            result = ResponseEntity.badRequest().build();
         else
             result = ResponseEntity.ok(series);
         return result;
@@ -42,12 +43,23 @@ public class SerieController {
         return result;
     }
 
-    @GetMapping(value = "/inicial/{inicial}")
-    public ResponseEntity<List<Serie>> getSerieByInicial(@PathVariable char inicial){
+    @GetMapping(params = "inicial")
+    public ResponseEntity<List<Serie>> getSerieByInicial(@RequestParam char inicial){
         List<Serie> series = ss.getSerieByInicial(inicial);
         ResponseEntity<List<Serie>> result;
         if(series.isEmpty())
-            result = ResponseEntity.notFound().build();
+            result = ResponseEntity.badRequest().build();
+        else
+            result = ResponseEntity.ok(series);
+        return result;
+    }
+
+    @GetMapping(params = "titulo")
+    public ResponseEntity<List<Serie>> getSerieByNombre(@RequestParam String titulo){
+        List<Serie> series = ss.getSerieByTitulo(titulo);
+        ResponseEntity<List<Serie>> result;
+        if(series.isEmpty())
+            result = ResponseEntity.badRequest().build();
         else
             result = ResponseEntity.ok(series);
         return result;

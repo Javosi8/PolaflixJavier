@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Factura implements Comparable<Factura>{
     private Date fecha;
 
     @ManyToOne
+    @JsonBackReference
     private Usuario usuario;
 
     @ElementCollection
@@ -62,7 +65,7 @@ public class Factura implements Comparable<Factura>{
     public int getMes(){
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(this.fecha);
-        return calendar.get(Calendar.MONTH);
+        return calendar.get(Calendar.MONTH)+1;
     }
     public int getAño(){
         Calendar calendar = Calendar.getInstance();

@@ -6,6 +6,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,13 +31,14 @@ public abstract class Serie {
     private char inicial;
     private String sinopsis;
 
-    @OneToMany(mappedBy = "serie")
+    @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private SortedSet<Temporada> temporadas;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Actor> actores;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private Set<Creador> creadores;
 
     protected Serie(){
@@ -99,7 +103,7 @@ public abstract class Serie {
 
     @Override
     public int hashCode(){
-        return Objects.hash(titulo, inicial, sinopsis, actores, creadores, temporadas);
+        return Objects.hash(titulo, inicial, sinopsis, actores, creadores);
     }
 
     @Override

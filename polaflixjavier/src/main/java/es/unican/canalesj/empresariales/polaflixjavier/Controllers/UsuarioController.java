@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Factura;
 import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Usuario;
 import es.unican.canalesj.empresariales.polaflixjavier.Services.UsuarioService;
 
@@ -27,7 +28,7 @@ public class UsuarioController {
         List<Usuario> usuarios = us.getUsuarios();
         ResponseEntity<List<Usuario>> result;
         if(usuarios.isEmpty())
-            result = ResponseEntity.notFound().build();
+            result = ResponseEntity.badRequest().build();
         else
             result = ResponseEntity.ok(usuarios);
         
@@ -42,7 +43,6 @@ public class UsuarioController {
             result = ResponseEntity.ok(usuario.get());
         else
             result = ResponseEntity.notFound().build();
-        
         return result;
     }
 
@@ -51,9 +51,9 @@ public class UsuarioController {
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSeriePendientes(nombreUsuario, idSerie);
         if(usuario.isPresent())
-            result = ResponseEntity.badRequest().build();
+            result = ResponseEntity.ok(usuario.get());    
         else
-            result = ResponseEntity.ok(usuario.get());
+            result = ResponseEntity.badRequest().build();
         return result;
     }
 
@@ -62,9 +62,9 @@ public class UsuarioController {
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSerieEmpezadas(nombreUsuario, idSerie);
         if(usuario.isPresent())
-            result = ResponseEntity.badRequest().build();
-        else
             result = ResponseEntity.ok(usuario.get());
+        else
+            result = ResponseEntity.badRequest().build();
         return result;
     }
 
@@ -73,9 +73,9 @@ public class UsuarioController {
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSerieTerminadas(nombreUsuario, idSerie);
         if(usuario.isPresent())
-            result = ResponseEntity.badRequest().build();
-        else
             result = ResponseEntity.ok(usuario.get());
+        else
+            result = ResponseEntity.badRequest().build();
         return result;
     }
 
@@ -85,9 +85,21 @@ public class UsuarioController {
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.verCapitulo(nombreUsuario, idSerie, numTemporada, numCapitulo);
         if(usuario.isPresent())
-            result = ResponseEntity.badRequest().build();
-        else
             result = ResponseEntity.ok(usuario.get());
+        else
+            result = ResponseEntity.badRequest().build();
         return result;
     }
+
+    @GetMapping(value = "/{nombreUsuario}/facturas")
+    public ResponseEntity<List<Factura>> getFacturas(@PathVariable String nombreUsuario){
+        ResponseEntity<List<Factura>> result;
+        List<Factura> facturas = us.getFacturas(nombreUsuario);
+        if(facturas.isEmpty())
+            result = ResponseEntity.badRequest().build();
+        else
+            result = ResponseEntity.ok(facturas);
+        return result;
+    }
+    
 }

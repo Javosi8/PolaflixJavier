@@ -8,6 +8,9 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
@@ -33,7 +36,8 @@ public abstract class Usuario {
     @ManyToMany
     private Set<Serie> terminadas;
 
-    @OneToMany(mappedBy = "usuario")
+    @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private SortedSet<Factura> facturas;
 
     @OneToMany
@@ -54,6 +58,7 @@ public abstract class Usuario {
         terminadas = new HashSet<Serie>();
 
         facturas = new TreeSet<Factura>();
+        facturas.add(new Factura(this, new Date()));
 
         capitulosVistos = new HashSet<>();
     }
@@ -64,7 +69,7 @@ public abstract class Usuario {
         Date fechaActual = new Date();
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(fechaActual);
-        int mes = calendar.get(Calendar.MONTH);
+        int mes = calendar.get(Calendar.MONTH)+1;
         int año = calendar.get(Calendar.YEAR);
 
         Factura facturaVigente = facturas.last();
@@ -88,7 +93,7 @@ public abstract class Usuario {
     public void agregarSerieAPendientes(Serie serie){
         if((!terminadas.contains(serie)) && (!empezadas.contains(serie))){
             pendientes.add(serie);
-        }        
+        }   
     }
 
     public void agregarSerieAEmpezadas(Serie serie){
@@ -172,7 +177,7 @@ public abstract class Usuario {
 
     @Override
     public int hashCode(){
-        return Objects.hash(username, password, iban, empezadas, pendientes, terminadas, facturas, capitulosVistos);
+        return Objects.hash(username, password, iban);
     }
 
     @Override
@@ -187,8 +192,6 @@ public abstract class Usuario {
 
         Usuario usuario = (Usuario)o;
         return ((this.username.equals(usuario.getUsername())) && (this.password.equals(usuario.getPassword()))
-                 && (this.iban.equals(usuario.getIBAN())) && (this.pendientes.equals(usuario.getPendientes()))
-                 && (this.empezadas.equals(usuario.getEmpezadas())) && (this.terminadas.equals(usuario.getTerminadas()))
-                 && (this.capitulosVistos.equals(usuario.getCapitulosVistos())) && (this.facturas.equals(usuario.getFacturas())));
+                 && (this.iban.equals(usuario.getIBAN())));
     }
 }

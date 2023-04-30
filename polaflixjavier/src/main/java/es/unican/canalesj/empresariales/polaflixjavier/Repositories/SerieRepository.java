@@ -8,4 +8,5 @@ import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Serie;
 
 public interface SerieRepository extends JpaRepository<Serie, Long> {
     public List<Serie> findByInicial(char inicial);
+    public List<Serie> findByTitulo(String titulo);
 }

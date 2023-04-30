@@ -2,6 +2,8 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -21,6 +23,7 @@ public class Capitulo implements Comparable<Capitulo>{
     private String enlace;
 
     @ManyToOne
+    @JsonBackReference
     private Temporada temporada;
 
     protected Capitulo(){
