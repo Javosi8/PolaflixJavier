@@ -103,7 +103,7 @@ public abstract class Serie {
 
     @Override
     public int hashCode(){
-        return Objects.hash(titulo, inicial, sinopsis, actores, creadores);
+        return Objects.hash(titulo, inicial, sinopsis);
     }
 
     @Override
@@ -118,7 +118,6 @@ public abstract class Serie {
 
         Serie serie = (Serie)o;
         return (this.titulo.equals(serie.getTitulo()) && (this.sinopsis.equals(serie.getSinopsis()))
-        && (this.actores.equals(serie.getActores())) && (this.creadores.equals(serie.getCreadores()))
-        && (this.temporadas.equals(serie.getTemporadas())));
+        && (this.inicial == serie.getInicial()));
     }
 }

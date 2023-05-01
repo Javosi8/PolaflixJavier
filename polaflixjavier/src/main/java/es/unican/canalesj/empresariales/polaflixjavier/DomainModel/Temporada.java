@@ -90,8 +90,7 @@ public class Temporada implements Comparable<Temporada>{
         }
 
         Temporada temporada = (Temporada)o;
-        return ((this.serie.equals(temporada.getSerie())) && (this.numTemporada == temporada.getNumTemporada())
-                && (this.capitulos.equals(temporada.getCapitulos())));
+        return ((this.serie.equals(temporada.getSerie())) && (this.numTemporada == temporada.getNumTemporada()));
     }
 
     @Override
