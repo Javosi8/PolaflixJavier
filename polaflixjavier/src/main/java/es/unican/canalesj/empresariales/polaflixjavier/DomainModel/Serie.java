@@ -7,7 +7,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -27,18 +29,24 @@ public abstract class Serie {
     @GeneratedValue
     private long id;
     
+    @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})
     private String titulo;    
+    @JsonView({Views.DescripcionSerie.class})
     private char inicial;
+    @JsonView({Views.DescripcionSerie.class})
     private String sinopsis;
 
     @OneToMany(mappedBy = "serie", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonView({Views.DescripcionSerie.class})
     private SortedSet<Temporada> temporadas;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonView({Views.DescripcionSerie.class})
     private Set<Actor> actores;
 
     @ManyToMany(cascade = CascadeType.ALL)
+    @JsonView({Views.DescripcionSerie.class})
     private Set<Creador> creadores;
 
     protected Serie(){

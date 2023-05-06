@@ -7,7 +7,9 @@ import java.util.List;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -21,8 +23,14 @@ public class Factura implements Comparable<Factura>{
     @GeneratedValue
     private long id;
 
+    @JsonView({Views.DescripcionFactura.class})
     private double costeTotal;
+    @JsonView({Views.DescripcionFactura.class})
     private Date fecha;
+    @JsonView({Views.DescripcionFactura.class})
+    private int mes;
+    @JsonView({Views.DescripcionFactura.class})
+    private int año;
 
     @ManyToOne
     @JsonBackReference
@@ -39,6 +47,11 @@ public class Factura implements Comparable<Factura>{
         this.costeTotal = 0;
         this.fecha = fecha;
         this.usuario = usuario;
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        this.mes = calendar.get(Calendar.MONTH)+1;
+        this.año = calendar.get(Calendar.YEAR);
 
         entradasFactura = new ArrayList<Entrada>();
     }
@@ -63,14 +76,10 @@ public class Factura implements Comparable<Factura>{
         return usuario;
     }
     public int getMes(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this.fecha);
-        return calendar.get(Calendar.MONTH)+1;
+        return mes;
     }
     public int getAño(){
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(this.fecha);
-        return calendar.get(Calendar.YEAR);
+        return año;
     }
     //#endregion
 
@@ -80,6 +89,10 @@ public class Factura implements Comparable<Factura>{
     }
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(fecha);
+        this.mes = calendar.get(Calendar.MONTH)+1;
+        this.año = calendar.get(Calendar.YEAR);
     }
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;

@@ -9,7 +9,9 @@ import java.util.SortedSet;
 import java.util.TreeSet;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.DiscriminatorColumn;
 import jakarta.persistence.Entity;
@@ -25,22 +27,31 @@ import jakarta.persistence.OneToMany;
 public abstract class Usuario {
     
     @Id
+    @JsonView({Views.DescripcionUsuario.class})
     private String username;
+
+    @JsonView({Views.DescripcionUsuario.class})
     private String password;
+    @JsonView({Views.DescripcionUsuario.class})
     private String iban;
 
     @ManyToMany
+    @JsonView({Views.DescripcionUsuario.class})
     private Set<Serie> empezadas;
     @ManyToMany
+    @JsonView({Views.DescripcionUsuario.class})
     private Set<Serie> pendientes;
     @ManyToMany
+    @JsonView({Views.DescripcionUsuario.class})
     private Set<Serie> terminadas;
 
     @OneToMany(mappedBy = "usuario", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonView({Views.DescripcionFactura.class})
     private SortedSet<Factura> facturas;
 
     @OneToMany
+    @JsonView({Views.DescripcionUsuario.class})
     private Set<Capitulo> capitulosVistos;
 
     protected Usuario(){

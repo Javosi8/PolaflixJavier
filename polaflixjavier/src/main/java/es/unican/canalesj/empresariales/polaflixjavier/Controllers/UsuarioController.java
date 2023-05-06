@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Factura;
 import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Usuario;
 import es.unican.canalesj.empresariales.polaflixjavier.Services.UsuarioService;
@@ -24,6 +27,7 @@ public class UsuarioController {
     private UsuarioService us;
 
     @GetMapping
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<List<Usuario>> getUsuarios(){
         List<Usuario> usuarios = us.getUsuarios();
         ResponseEntity<List<Usuario>> result;
@@ -36,6 +40,7 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/{nombreUsuario}")
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> getUsuario(@PathVariable String nombreUsuario){
         Optional<Usuario> usuario = us.getUsuario(nombreUsuario);
         ResponseEntity<Usuario> result;
@@ -47,6 +52,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{nombreUsuario}/agregarSeriePendientes/{idSerie}")
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> agregarSeriePendientes(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSeriePendientes(nombreUsuario, idSerie);
@@ -58,6 +64,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{nombreUsuario}/agregarSerieEmpezadas/{idSerie}")
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> agregarSerieEmpezadas(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSerieEmpezadas(nombreUsuario, idSerie);
@@ -69,6 +76,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{nombreUsuario}/agregarSerieTerminadas/{idSerie}")
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> agregarSerieTerminadas(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSerieTerminadas(nombreUsuario, idSerie);
@@ -80,6 +88,7 @@ public class UsuarioController {
     }
 
     @PutMapping(value = "/{nombreUsuario}/verCapitulo")
+    @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> verCapitulo(@PathVariable String nombreUsuario, @RequestParam("idSerie") long idSerie,
                 @RequestParam("idTemporada") int numTemporada, @RequestParam("idCapitulo") int numCapitulo){
         ResponseEntity<Usuario> result;
@@ -92,6 +101,7 @@ public class UsuarioController {
     }
 
     @GetMapping(value = "/{nombreUsuario}/facturas")
+    @JsonView({Views.DescripcionFactura.class})
     public ResponseEntity<List<Factura>> getFacturas(@PathVariable String nombreUsuario){
         ResponseEntity<List<Factura>> result;
         List<Factura> facturas = us.getFacturas(nombreUsuario);

@@ -2,6 +2,9 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -13,7 +16,9 @@ public class Actor {
     @GeneratedValue
     private long id;
     
+    @JsonView({Views.DescripcionSerie.class})
     private String nombre;
+    @JsonView({Views.DescripcionSerie.class})
     private String apellido;
 
     protected Actor(){

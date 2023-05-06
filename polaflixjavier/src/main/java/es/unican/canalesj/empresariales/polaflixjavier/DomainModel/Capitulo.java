@@ -3,7 +3,9 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonView;
 
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -16,10 +18,15 @@ public class Capitulo implements Comparable<Capitulo>{
     @GeneratedValue
     private long id;
 
+    @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})
     private int numCapitulo;
+    @JsonView({Views.DescripcionSerie.class})
     private int duracion;
+    @JsonView({Views.DescripcionSerie.class})
     private String descripcion;
+    @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})
     private String titulo;
+    @JsonView({Views.DescripcionSerie.class})
     private String enlace;
 
     @ManyToOne
