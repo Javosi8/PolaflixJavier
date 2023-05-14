@@ -1,1 +1,13 @@
-<h1>{{title}}</h1>
+<div class="topnav">
+    <img id="logo" src="assets/logo.png" width="75" height="100" />
+    <h1>Bienvenido {{usuario.username}}</h1>
+    <img id="perfil" src="assets/perfil.png" width="120" height="100"/>
+  </div>
+  
+  <nav class="cabecera">
+    <a id="menu" routerLink="/usuarios/{{usuario.username}}" class="cabecera">Inicio</a>
+    <a id="menu" routerLink="/agregarSerie" class="cabecera">Agregar Serie</a>
+    <a id="menu" routerLink="/cargo" class="cabecera">Cargo</a>
+  </nav>
+  
+  <router-outlet></router-outlet>

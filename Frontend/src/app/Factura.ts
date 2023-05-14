@@ -1,4 +1,4 @@
-import { Entrada } from "./Entrada";
+import { Entrada } from "./entrada";
 
 export interface Factura {
     costeTotal: number;

@@ -1,4 +1,4 @@
-import { Capitulo } from "./Capitulo";
+import { Capitulo } from "./capitulo";
 
 export interface Temporada {
     numTemporada: number;

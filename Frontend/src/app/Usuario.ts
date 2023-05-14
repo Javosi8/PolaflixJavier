@@ -1,5 +1,5 @@
-import { Serie } from "./Serie";
-import { Factura } from "./Factura";
+import { Serie } from "./serie";
+import { Factura } from "./factura";
 
 export interface Usuario {
     username: string;
