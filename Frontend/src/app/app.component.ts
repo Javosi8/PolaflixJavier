@@ -15,8 +15,8 @@ export class AppComponent implements OnInit{
   constructor(public usuarioService: UsuarioService){}
 
   ngOnInit(): void {
-      this.usuarioService.getUsuario(window.location.href.split("/")[4]).subscribe(
-        data => {this.usuario = data}
-      )
+    this.usuarioService.getUsuario(window.location.href.split("/")[4]).subscribe(
+      data => {this.usuario = data}
+    )
   }
 }

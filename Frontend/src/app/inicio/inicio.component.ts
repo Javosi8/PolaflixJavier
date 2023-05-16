@@ -8,6 +8,7 @@ import { UsuarioService } from '../usuario.service';
   styleUrls: ['./inicio.component.css']
 })
 export class InicioComponent implements OnInit {
+  
   usuario: Partial<Usuario> = {};
 
   constructor(public usuarioService: UsuarioService){ }
