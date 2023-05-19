@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuarioService } from './usuario.service';
 import { Usuario } from './usuario';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit{
 
   usuario: Partial<Usuario> = {};
 
-  constructor(public usuarioService: UsuarioService){}
+  constructor(public usuarioService: UsuarioService, public route: ActivatedRoute){}
 
   ngOnInit(): void {
     this.usuarioService.getUsuario(window.location.href.split("/")[4]).subscribe(

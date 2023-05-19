@@ -27,10 +27,6 @@ public class UsuarioService {
     @Autowired
     private SerieRepository sr;
 
-    public List<Usuario> getUsuarios(){
-        return ur.findAll();
-    }
-
     public Optional<Usuario> getUsuario(String nombreUsuario){
         return ur.findById(nombreUsuario);
     }
@@ -41,24 +37,6 @@ public class UsuarioService {
         Optional<Serie> serie = sr.findById(idSerie);
         if(usuario.isPresent() && serie.isPresent())
             usuario.get().agregarSerieAPendientes(serie.get());
-        return usuario;
-    }
-
-    @Transactional
-    public Optional<Usuario> agregarSerieEmpezadas(String nombreUsuario, long idSerie){
-        Optional<Usuario> usuario = ur.findById(nombreUsuario);
-        Optional<Serie> serie = sr.findById(idSerie);
-        if(usuario.isPresent() && serie.isPresent())
-            usuario.get().agregarSerieAEmpezadas(serie.get());
-        return usuario;
-    }
-
-    @Transactional
-    public Optional<Usuario> agregarSerieTerminadas(String nombreUsuario, long idSerie){
-        Optional<Usuario> usuario = ur.findById(nombreUsuario);
-        Optional<Serie> serie = sr.findById(idSerie);
-        if(usuario.isPresent() && serie.isPresent())
-            usuario.get().agregarSerieATerminadas(serie.get());
         return usuario;
     }
 

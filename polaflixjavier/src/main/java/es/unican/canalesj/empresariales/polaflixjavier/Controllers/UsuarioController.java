@@ -28,19 +28,6 @@ public class UsuarioController {
     @Autowired
     private UsuarioService us;
 
-    @GetMapping
-    @JsonView({Views.DescripcionUsuario.class})
-    public ResponseEntity<List<Usuario>> getUsuarios(){
-        List<Usuario> usuarios = us.getUsuarios();
-        ResponseEntity<List<Usuario>> result;
-        if(usuarios.isEmpty())
-            result = ResponseEntity.badRequest().build();
-        else
-            result = ResponseEntity.ok(usuarios);
-        
-        return result;
-    }
-
     @GetMapping(value = "/{nombreUsuario}")
     @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> getUsuario(@PathVariable String nombreUsuario){
@@ -53,37 +40,13 @@ public class UsuarioController {
         return result;
     }
 
-    @PutMapping(value = "/{nombreUsuario}/agregarSeriePendientes/{idSerie}")
+    @PutMapping(value = "/{nombreUsuario}/pendientes/{idSerie}")
     @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> agregarSeriePendientes(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
         ResponseEntity<Usuario> result;
         Optional<Usuario> usuario = us.agregarSeriePendientes(nombreUsuario, idSerie);
         if(usuario.isPresent())
             result = ResponseEntity.ok(usuario.get());    
-        else
-            result = ResponseEntity.badRequest().build();
-        return result;
-    }
-
-    @PutMapping(value = "/{nombreUsuario}/agregarSerieEmpezadas/{idSerie}")
-    @JsonView({Views.DescripcionUsuario.class})
-    public ResponseEntity<Usuario> agregarSerieEmpezadas(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
-        ResponseEntity<Usuario> result;
-        Optional<Usuario> usuario = us.agregarSerieEmpezadas(nombreUsuario, idSerie);
-        if(usuario.isPresent())
-            result = ResponseEntity.ok(usuario.get());
-        else
-            result = ResponseEntity.badRequest().build();
-        return result;
-    }
-
-    @PutMapping(value = "/{nombreUsuario}/agregarSerieTerminadas/{idSerie}")
-    @JsonView({Views.DescripcionUsuario.class})
-    public ResponseEntity<Usuario> agregarSerieTerminadas(@PathVariable("nombreUsuario") String nombreUsuario, @PathVariable("idSerie") long idSerie){
-        ResponseEntity<Usuario> result;
-        Optional<Usuario> usuario = us.agregarSerieTerminadas(nombreUsuario, idSerie);
-        if(usuario.isPresent())
-            result = ResponseEntity.ok(usuario.get());
         else
             result = ResponseEntity.badRequest().build();
         return result;

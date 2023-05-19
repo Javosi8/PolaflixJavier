@@ -6,11 +6,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { UsuarioService } from './usuario.service';
 import { SerieService } from './serie.service';
 import { InicioComponent } from './inicio/inicio.component';
+import { AgregarSerieComponent } from './agregar-serie/agregar-serie.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    InicioComponent
+    InicioComponent,
+    AgregarSerieComponent
   ],
   imports: [
     BrowserModule,
