@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Serie } from './serie';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class SerieService {
 
   private serieUrl = 'http://localhost:8080/series';

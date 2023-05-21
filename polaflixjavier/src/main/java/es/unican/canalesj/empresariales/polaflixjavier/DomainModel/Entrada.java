@@ -3,15 +3,23 @@ package es.unican.canalesj.empresariales.polaflixjavier.DomainModel;
 import java.util.Date;
 import java.util.Objects;
 
+import com.fasterxml.jackson.annotation.JsonView;
+
+import es.unican.canalesj.empresariales.polaflixjavier.Views;
 import jakarta.persistence.Embeddable;
 
 @Embeddable
 public class Entrada {
 
+    @JsonView({Views.DescripcionFactura.class})
     private double coste;
+    @JsonView({Views.DescripcionFactura.class})
     private Date fecha;
+    @JsonView({Views.DescripcionFactura.class})
     private String nombreSerie;
+    @JsonView({Views.DescripcionFactura.class})
     private int numeroTemporada;
+    @JsonView({Views.DescripcionFactura.class})
     private int numeroCapitulo;
 
     protected Entrada(){

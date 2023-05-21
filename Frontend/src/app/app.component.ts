@@ -16,7 +16,7 @@ export class AppComponent implements OnInit{
   constructor(public usuarioService: UsuarioService, public route: ActivatedRoute){}
 
   ngOnInit(): void {
-    this.usuarioService.getUsuario(window.location.href.split("/")[4]).subscribe(
+    this.usuarioService.getUsuario().subscribe(
       data => {this.usuario = data}
     )
   }

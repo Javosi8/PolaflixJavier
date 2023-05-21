@@ -21,6 +21,7 @@ public class Temporada implements Comparable<Temporada>{
     
     @Id
     @GeneratedValue
+    @JsonView({Views.DescripcionSerie.class})
     private long id;
 
     @JsonView({Views.DescripcionSerie.class})

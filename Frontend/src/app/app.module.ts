@@ -12,7 +12,7 @@ import { AgregarSerieComponent } from './agregar-serie/agregar-serie.component';
   declarations: [
     AppComponent,
     InicioComponent,
-    AgregarSerieComponent
+    AgregarSerieComponent,
   ],
   imports: [
     BrowserModule,

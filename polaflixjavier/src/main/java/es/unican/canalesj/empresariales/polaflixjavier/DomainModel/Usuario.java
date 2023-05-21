@@ -30,9 +30,7 @@ public abstract class Usuario {
     @JsonView({Views.DescripcionUsuario.class})
     private String username;
 
-    @JsonView({Views.DescripcionUsuario.class})
     private String password;
-    @JsonView({Views.DescripcionUsuario.class})
     private String iban;
 
     @ManyToMany

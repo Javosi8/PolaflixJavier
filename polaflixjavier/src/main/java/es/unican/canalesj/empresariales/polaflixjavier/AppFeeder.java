@@ -1,6 +1,7 @@
 package es.unican.canalesj.empresariales.polaflixjavier;
 
 import java.util.HashSet;
+import java.util.Optional;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -32,8 +33,9 @@ public class AppFeeder implements CommandLineRunner{
 
     @Override
     public void run(String... args){
-        feedUsuarios();
         feedSeries();
+        feedUsuarios();
+        //feedSeriesAUsuario();
 
         System.out.println("Datos añadidos correctamente en el AppFeeder");
     }
@@ -41,6 +43,10 @@ public class AppFeeder implements CommandLineRunner{
     public void feedUsuarios(){
         Usuario u1 = new UsuarioNormal("Paco", "Perez", "123456");
         Usuario u2 = new UsuarioPremium("Javier", "Canales", "88888888");
+        Optional<Serie> s = sr.findById((long)1);
+        if(s.isPresent()){
+            u2.agregarSerieAPendientes(s.get());
+        }
         ur.save(u1);
         ur.save(u2);
     }
@@ -140,7 +146,7 @@ public class AppFeeder implements CommandLineRunner{
         s2.setCreadores(creadoresS2);
         s2.setActores(actoresS2);
 
-        // Gestionamos la serie 3
+        // Gestión para la serie 3
         Serie s3 = new Gold("Peaky Blinders", "La mafia inglesa");
         Temporada t1S3 = new Temporada(1, s3);
         Temporada t2S3 = new Temporada(2, s3);
@@ -186,9 +192,56 @@ public class AppFeeder implements CommandLineRunner{
         s3.setCreadores(creadoresS3);
         s3.setActores(actoresS3);
 
+        // Gestión para la serie 4
+        Serie s4 = new Gold("La casa de papel", "Muchos atracos");
+        Temporada t1S4 = new Temporada(1, s4);
+        Temporada t2S4 = new Temporada(2, s4);
+        Temporada t3S4 = new Temporada(3, s4);
+        SortedSet<Temporada> temporadasS4 = new TreeSet<>();
+        SortedSet<Capitulo> capitulosT1S4 = new TreeSet<>();
+        SortedSet<Capitulo> capitulosT2S4 = new TreeSet<>();
+        SortedSet<Capitulo> capitulosT3S4 = new TreeSet<>();
+
+        capitulosT1S4.add(new Capitulo(1, "Primer capitulo", "Capitulo numero 1", 90, "http://verCapitulo.com", t1S4));
+        capitulosT1S4.add(new Capitulo(2, "Segundo capitulo", "Capitulo numero 2", 90, "http://verCapitulo.com", t1S4));
+        capitulosT1S4.add(new Capitulo(3, "Tercer capitulo", "Capitulo numero 3", 90, "http://verCapitulo.com", t1S4));
+
+        capitulosT2S4.add(new Capitulo(1, "Primer capitulo", "Capitulo numero 1", 90, "http://verCapitulo.com", t2S4));
+        capitulosT2S4.add(new Capitulo(2, "Segundo capitulo", "Capitulo numero 2", 90, "http://verCapitulo.com", t2S4));
+        capitulosT2S4.add(new Capitulo(3, "Tercer capitulo", "Capitulo numero 3", 90, "http://verCapitulo.com", t2S4));
+
+        capitulosT3S4.add(new Capitulo(1, "Primer capitulo", "Capitulo numero 1", 90, "http://verCapitulo.com", t3S4));
+        capitulosT3S4.add(new Capitulo(2, "Segundo capitulo", "Capitulo numero 2", 90, "http://verCapitulo.com", t3S4));
+        capitulosT3S4.add(new Capitulo(3, "Tercer capitulo", "Capitulo numero 3", 90, "http://verCapitulo.com", t3S4));
+
+        t1S4.setCapitulos(capitulosT1S4);
+        t2S4.setCapitulos(capitulosT2S4);
+        t3S4.setCapitulos(capitulosT3S4);
+
+        temporadasS4.add(t1S4);
+        temporadasS4.add(t2S4);
+        temporadasS4.add(t3S4);
+        s4.setTemporadas(temporadasS4);
+
+        Creador c1s4 = new Creador("Pedro", "Almodovar");
+        Creador c2s4 = new Creador("Steven", "Spielberg");
+        Actor a1s4 = new Actor("Brad", "Pitt");
+        Actor a2s4 = new Actor("Angelina", "Jolie");
+        HashSet<Creador> creadoresS4 = new HashSet<>();
+        HashSet<Actor> actoresS4 = new HashSet<>();
+
+        creadoresS4.add(c1s4);
+        creadoresS4.add(c2s4);
+        actoresS4.add(a1s4);
+        actoresS4.add(a2s4);
+
+        s4.setCreadores(creadoresS4);
+        s4.setActores(actoresS4);
+
         sr.save(s1);
         sr.save(s2);
         sr.save(s3);
+        sr.save(s4);
     }
 
 }

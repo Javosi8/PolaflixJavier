@@ -1,3 +1,15 @@
+.contenedor{
+  width: 95%;
+}
+
+.encabezado{
+  font-size: large;
+}
+
+.separador{
+  height: 20px;;
+}
+
 td{
     padding: 20px;
     text-align: center;
@@ -25,6 +37,3 @@ table{
   margin-left: 5%
 }
   
-.contenedor{
-  width: 95%;
-}

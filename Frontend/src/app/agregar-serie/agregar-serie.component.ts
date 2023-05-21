@@ -18,7 +18,7 @@ export class AgregarSerieComponent implements OnInit {
   constructor(public serieService: SerieService, public usuarioService: UsuarioService) { }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuario(window.location.href.split("/")[4]).subscribe(
+    this.usuarioService.getUsuario().subscribe(
       data => {this.usuario = data}
     )
     this.serieService.getSeries().subscribe(
@@ -58,7 +58,7 @@ export class AgregarSerieComponent implements OnInit {
     div.innerHTML = '';
     lista.sort();
     lista.forEach( function(valor) {
-      var elemento1 = self.crearElemento("label", valor.titulo, ["class", "labelsseries"]);
+      var elemento1 = self.crearElemento("label", valor.titulo, ["class", "etiquetaSerie"]);
       elemento1.addEventListener('click', () => {
         self.cambiaVisibilidad(valor.titulo);
       });
@@ -73,8 +73,8 @@ export class AgregarSerieComponent implements OnInit {
       var elemento3 = self.crearElemento("br", null, []);
       var elemento4 = self.crearElemento("div", null, ["id", valor.titulo, "style", "display: none;","class", "tablita"]);
       var elemento5 = self.crearElemento("p", valor.sinopsis, ["class", "sinopsis"]);
-      var elemento51 = self.crearElemento("p", "Creadores: "+valor.creadores.map(function(item) {return item.nombre;}), ["class", "creadores"]);
-      var elemento52 = self.crearElemento("p", "Actores: "+valor.actores.map(function(item) {return item.nombre;}), ["class", "actores"]);
+      var elemento51 = self.crearElemento("p", "Creadores: "+valor.creadores.map(function(item) {return item.nombre + " " + item.apellido;}), ["class", "creadores"]);
+      var elemento52 = self.crearElemento("p", "Actores: "+valor.actores.map(function(item) {return item.nombre + " " + item.apellido;}), ["class", "actores"]);
       var elemento6 = self.crearElemento("input", null, ["type", "button", "id", valor.titulo+"cerrar", "value", "Cerrar", "class", "inputs"]);
       elemento6.addEventListener('click', () => {
         self.cambiaVisibilidad(valor.titulo);

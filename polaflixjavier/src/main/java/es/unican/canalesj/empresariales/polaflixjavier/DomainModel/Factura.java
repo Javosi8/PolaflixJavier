@@ -21,6 +21,7 @@ public class Factura implements Comparable<Factura>{
     
     @Id
     @GeneratedValue
+    @JsonView({Views.DescripcionFactura.class})
     private long id;
 
     @JsonView({Views.DescripcionFactura.class})
@@ -37,6 +38,7 @@ public class Factura implements Comparable<Factura>{
     private Usuario usuario;
 
     @ElementCollection
+    @JsonView({Views.DescripcionFactura.class})
     private List<Entrada> entradasFactura;
 
     protected Factura(){

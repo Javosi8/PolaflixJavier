@@ -16,6 +16,7 @@ public class Capitulo implements Comparable<Capitulo>{
     
     @Id
     @GeneratedValue
+    @JsonView({Views.DescripcionSerie.class})
     private long id;
 
     @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})

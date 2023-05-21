@@ -27,6 +27,7 @@ public abstract class Serie {
     
     @Id
     @GeneratedValue
+    @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})
     private long id;
     
     @JsonView({Views.DescripcionSerie.class, Views.DescripcionUsuario.class})

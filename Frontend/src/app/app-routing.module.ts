@@ -6,7 +6,7 @@ import { AgregarSerieComponent } from './agregar-serie/agregar-serie.component';
 const routes: Routes = [
   {path: '', redirectTo: '/usuarios/Javier', pathMatch: 'full'},
   {path: 'usuarios/:username', component: InicioComponent},
-  {path: 'agregarSerie', component: AgregarSerieComponent}
+  {path: 'agregarSerie', component: AgregarSerieComponent},
 ]
 
 @NgModule({

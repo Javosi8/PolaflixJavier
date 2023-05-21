@@ -2,22 +2,24 @@
   <table class="contenedor">
     <tbody>
       <nav class="series">
-        <tr >Series Pendientes</tr>
+        <tr class="encabezado"><b>Series Pendientes</b></tr>
         <div class="bordes">
-          <tr  *ngFor="let serie of usuario.pendientes">
-            <td routerLink="/verSerie/{{serie.id}}"><a >{{ serie.titulo }}</a></td>
+          <tr *ngFor="let serie of usuario.pendientes">
+            <td routerLink="/verSerie/{{serie.id}}"><a>{{ serie.titulo }}</a></td>
           </tr>
         </div>
-        <tr>Series Empezadas</tr>
+        <tr class="separador"></tr>
+        <tr class="encabezado"><b>Series Empezadas</b></tr>
         <div class="bordes">
           <tr *ngFor="let serie of usuario.empezadas">
-            <td routerLink="/verSerie/{{serie.id}}"><a >{{ serie.titulo }}</a></td>
+            <td routerLink="/verSerie/{{serie.id}}"><a>{{ serie.titulo }}</a></td>
           </tr>
         </div>
-        <tr>Series Finalizadas</tr>
+        <tr class="separador"></tr>
+        <tr class="encabezado"><b>Series Finalizadas</b></tr>
         <div class="bordes">
           <tr *ngFor="let serie of usuario.terminadas">
-            <td routerLink="/verSerie/{{serie.id}}"><a >{{ serie.titulo }}</a></td>
+            <td routerLink="/verSerie/{{serie.id}}"><a>{{ serie.titulo }}</a></td>
           </tr>
         </div>
       </nav>
