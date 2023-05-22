@@ -1,40 +1,56 @@
-<nav class="Abecedario">
-  <a (click)="mostrarSeries('A')" [routerLink]="[]">A</a>
-  <a (click)="mostrarSeries('B')" [routerLink]="[]">B</a>
-  <a (click)="mostrarSeries('C')" [routerLink]="[]">C</a>
-  <a (click)="mostrarSeries('D')" [routerLink]="[]">D</a>
-  <a (click)="mostrarSeries('E')" [routerLink]="[]">E</a>
-  <a (click)="mostrarSeries('F')" [routerLink]="[]">F</a>
-  <a (click)="mostrarSeries('G')" [routerLink]="[]">G</a>
-  <a (click)="mostrarSeries('H')" [routerLink]="[]">H</a>
-  <a (click)="mostrarSeries('I')" [routerLink]="[]">I</a>
-  <a (click)="mostrarSeries('J')" [routerLink]="[]">J</a>
-  <a (click)="mostrarSeries('K')" [routerLink]="[]">K</a>
-  <a (click)="mostrarSeries('L')" [routerLink]="[]">L</a>
-  <a (click)="mostrarSeries('M')" [routerLink]="[]">M</a>
-  <a (click)="mostrarSeries('N')" [routerLink]="[]">N</a>
-  <a (click)="mostrarSeries('O')" [routerLink]="[]">O</a>
-  <a (click)="mostrarSeries('P')" [routerLink]="[]">P</a>
-  <a (click)="mostrarSeries('Q')" [routerLink]="[]">Q</a>
-  <a (click)="mostrarSeries('R')" [routerLink]="[]">R</a>
-  <a (click)="mostrarSeries('S')" [routerLink]="[]">S</a>
-  <a (click)="mostrarSeries('T')" [routerLink]="[]">T</a>
-  <a (click)="mostrarSeries('U')" [routerLink]="[]">U</a>
-  <a (click)="mostrarSeries('V')" [routerLink]="[]">V</a>
-  <a (click)="mostrarSeries('W')" [routerLink]="[]">W</a>
-  <a (click)="mostrarSeries('X')" [routerLink]="[]">X</a>
-  <a (click)="mostrarSeries('Y')" [routerLink]="[]">Y</a>
-  <a (click)="mostrarSeries('Z')" [routerLink]="[]">Z</a>
-  <a (click)="mostrarSeries('0')" [routerLink]="[]">0-9</a>
-</nav>
-
-<nav class="buscador">
-  <form action="/action_page.php" >
-    <input type="search" id="barraBusqueda" name="busqueda">
-    <input type="button" id="butsearch" value="Buscar" (click)="buscador()">
-  </form>
-</nav>
+<div class="buscadores">
+  <nav class="Abecedario">
+    <a (click)="cambiaTitulo('')" [routerLink]="[]">Todas</a>
+    <a (click)="cambiaTitulo('A')" [routerLink]="[]">A</a>
+    <a (click)="cambiaTitulo('B')" [routerLink]="[]">B</a>
+    <a (click)="cambiaTitulo('C')" [routerLink]="[]">C</a>
+    <a (click)="cambiaTitulo('D')" [routerLink]="[]">D</a>
+    <a (click)="cambiaTitulo('E')" [routerLink]="[]">E</a>
+    <a (click)="cambiaTitulo('F')" [routerLink]="[]">F</a>
+    <a (click)="cambiaTitulo('G')" [routerLink]="[]">G</a>
+    <a (click)="cambiaTitulo('H')" [routerLink]="[]">H</a>
+    <a (click)="cambiaTitulo('I')" [routerLink]="[]">I</a>
+    <a (click)="cambiaTitulo('J')" [routerLink]="[]">J</a>
+    <a (click)="cambiaTitulo('K')" [routerLink]="[]">K</a>
+    <a (click)="cambiaTitulo('L')" [routerLink]="[]">L</a>
+    <a (click)="cambiaTitulo('M')" [routerLink]="[]">M</a>
+    <a (click)="cambiaTitulo('N')" [routerLink]="[]">N</a>
+    <a (click)="cambiaTitulo('O')" [routerLink]="[]">O</a>
+    <a (click)="cambiaTitulo('P')" [routerLink]="[]">P</a>
+    <a (click)="cambiaTitulo('Q')" [routerLink]="[]">Q</a>
+    <a (click)="cambiaTitulo('R')" [routerLink]="[]">R</a>
+    <a (click)="cambiaTitulo('S')" [routerLink]="[]">S</a>
+    <a (click)="cambiaTitulo('T')" [routerLink]="[]">T</a>
+    <a (click)="cambiaTitulo('U')" [routerLink]="[]">U</a>
+    <a (click)="cambiaTitulo('V')" [routerLink]="[]">V</a>
+    <a (click)="cambiaTitulo('W')" [routerLink]="[]">W</a>
+    <a (click)="cambiaTitulo('X')" [routerLink]="[]">X</a>
+    <a (click)="cambiaTitulo('Y')" [routerLink]="[]">Y</a>
+    <a (click)="cambiaTitulo('Z')" [routerLink]="[]">Z</a>
+    <a (click)="cambiaTitulo('0')" [routerLink]="[]">0-9</a>
+  </nav>
+  
+  <nav class="buscador">
+    <form>
+      <input type="search" id="barraBusqueda" name="busqueda">
+      <input type="button" id="buttonSearch" value="Buscar" (click)="buscador()">
+    </form>
+  </nav>
+</div>
 
 <div id = "series">
-
+  <div *ngFor="let serie of series">
+    <div class="cuadroSerie" *ngIf="serie.inicial === titulo || serie.titulo === titulo || titulo === ''">
+      <label style="cursor: pointer;" (click)="cambiaVisibilidad(serie.titulo)">{{serie.titulo}}</label>
+      <input type="button" id="{{serie.titulo}}-agregar" class="button" value="Agregar serie" (click)="agregaSerie(serie.id)">
+      <br>
+      <div id="{{serie.titulo}}" style="display: none;">
+        <p>{{serie.sinopsis}}</p>
+        <p>Creadores: </p>
+        <p>Actores: {{serie.creadores}}</p>
+        <input type="button" id="{{serie.titulo}}-cerrar" value="Cerrar" (click)="cambiaVisibilidad(serie.titulo)">
+        <br>
+      </div>
+    </div>
+  </div>
 </div>

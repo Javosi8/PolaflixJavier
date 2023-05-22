@@ -7,12 +7,12 @@
 }
 
 .separador{
-  height: 20px;;
+  height: 20px;
 }
 
 td{
     padding: 20px;
-    text-align: center;
+    text-align: left;
     cursor: pointer;
 }
 

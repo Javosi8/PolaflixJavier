@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
 
@@ -7,7 +7,7 @@ import { UsuarioService } from '../usuario.service';
   templateUrl: './inicio.component.html',
   styleUrls: ['./inicio.component.css']
 })
-export class InicioComponent implements OnInit {
+export class InicioComponent implements OnInit, OnDestroy {
   
   usuario: Partial<Usuario> = {};
 
@@ -17,6 +17,10 @@ export class InicioComponent implements OnInit {
     this.usuarioService.getUsuario().subscribe(
       data => {this.usuario = data}
     )
+  }
+
+  ngOnDestroy(): void {
+      this.usuarioService.usuario = this.usuario;
   }
   
 }

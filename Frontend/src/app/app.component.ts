@@ -8,12 +8,13 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
 export class AppComponent implements OnInit{
   title = 'Polaflix';
 
   usuario: Partial<Usuario> = {};
 
-  constructor(public usuarioService: UsuarioService, public route: ActivatedRoute){}
+  constructor(public usuarioService: UsuarioService){}
 
   ngOnInit(): void {
     this.usuarioService.getUsuario().subscribe(

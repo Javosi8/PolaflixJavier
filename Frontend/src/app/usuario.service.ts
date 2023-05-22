@@ -10,7 +10,8 @@ import { Factura } from './factura';
 
 export class UsuarioService {
 
-  private baseUrl = 'http://localhost:8080/usuarios/';
+  public usuario: Partial<Usuario> = {};
+  private baseUrl = 'http://localhost:8080/usuarios';
   private usuarioUrl: string;
 
   httpOptions = {
@@ -18,12 +19,11 @@ export class UsuarioService {
   };
 
   constructor(private http: HttpClient) {
-    this.usuarioUrl = 'http://localhost:8080/usuarios/' + window.location.href.split("/")[4];
+    this.usuarioUrl = this.baseUrl + "/" + window.location.href.split("/")[4];
   }
 
   getUsuario(): Observable<Usuario>{
-    const url = `${this.usuarioUrl}`;
-    return this.http.get<Usuario>(url);
+    return this.http.get<Usuario>(this.usuarioUrl);
   }
 
   agregarSeriePendiente(nombre: string, idSerie: number): Observable<Usuario>{

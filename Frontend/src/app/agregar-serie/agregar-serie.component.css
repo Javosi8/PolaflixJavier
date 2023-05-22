@@ -27,11 +27,6 @@
   color: #444;
 }
 
-.Abecedario .active {
-  background: #f46353;
-  color: white;
-}
-
 #barraBusqueda{
   position:relative;
   margin-bottom: 1.5rem;
@@ -42,9 +37,34 @@
   margin-top: 45px;
 }
 #series{
-  margin-left: 70px;
+  margin-left: 100px;
+  margin-top: 40px;
 }
 
-.etiquetaSerie{
-  margin-right: 20px;
+.buscadores{
+  display: flex;
+}
+
+.button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-image: -moz-linear-gradient(center bottom, rgb(149, 177, 255) 16%, rgb(77, 128, 248) 79%);
+  background-image: linear-gradient(to top, rgb(149, 177, 255) 16%, rgb(77, 128, 248) 79%); 
+  padding: 3px;
+  border: 1px solid #000;
+  color: black;
+  text-decoration: none;
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.cuadroSerie{
+  border: 1px solid black;
+  border-radius: 10px;
+  padding-top: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  width: 80%;
+  margin-bottom: 20px;
 }
