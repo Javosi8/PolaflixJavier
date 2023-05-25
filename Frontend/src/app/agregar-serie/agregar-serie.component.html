@@ -46,8 +46,8 @@
       <br>
       <div id="{{serie.titulo}}" style="display: none;">
         <p>{{serie.sinopsis}}</p>
-        <p>Creadores: </p>
-        <p>Actores: {{serie.creadores}}</p>
+        <p>Creadores: <span *ngFor="let creador of serie.creadores">{{creador.nombre + " " + creador.apellido + ", "}}</span></p>
+        <p>Actores: <span *ngFor="let actor of serie.actores">{{actor.nombre + " " + actor.apellido + ", "}}</span></p>
         <input type="button" id="{{serie.titulo}}-cerrar" value="Cerrar" (click)="cambiaVisibilidad(serie.titulo)">
         <br>
       </div>

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Usuario } from '../usuario';
 import { UsuarioService } from '../usuario.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-inicio',
@@ -11,12 +12,21 @@ export class InicioComponent implements OnInit, OnDestroy {
   
   usuario: Partial<Usuario> = {};
 
-  constructor(public usuarioService: UsuarioService){ }
+  constructor(public usuarioService: UsuarioService, private route: ActivatedRoute){ }
 
   ngOnInit(): void {
-    this.usuarioService.getUsuario().subscribe(
-      data => {this.usuario = data}
-    )
+    this.route.params.subscribe(params => {
+      this.cargaUsuario(params['username'])
+    })
+  }
+
+  cargaUsuario(username : string | null) {
+    console.log(username);
+    if (!(username === null)) {
+      this.usuarioService.getUsuario(username).subscribe(
+        data => {this.usuario = data}
+      )
+    }
   }
 
   ngOnDestroy(): void {

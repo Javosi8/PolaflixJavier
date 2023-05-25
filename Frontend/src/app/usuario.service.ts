@@ -12,18 +12,16 @@ export class UsuarioService {
 
   public usuario: Partial<Usuario> = {};
   private baseUrl = 'http://localhost:8080/usuarios';
-  private usuarioUrl: string;
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(private http: HttpClient) {
-    this.usuarioUrl = this.baseUrl + "/" + window.location.href.split("/")[4];
-  }
+  constructor(private http: HttpClient) { }
 
-  getUsuario(): Observable<Usuario>{
-    return this.http.get<Usuario>(this.usuarioUrl);
+  getUsuario(nombre: string): Observable<Usuario>{
+    const url = `${this.baseUrl}/${nombre}`;
+    return this.http.get<Usuario>(url);
   }
 
   agregarSeriePendiente(nombre: string, idSerie: number): Observable<Usuario>{
