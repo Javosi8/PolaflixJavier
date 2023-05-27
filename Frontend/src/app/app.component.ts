@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { UsuarioService } from './usuario.service';
-import { Usuario } from './usuario';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',

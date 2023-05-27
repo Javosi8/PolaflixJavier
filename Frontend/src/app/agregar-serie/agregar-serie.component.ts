@@ -20,9 +20,10 @@ export class AgregarSerieComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.usuario;
-    this.serieService.getSeries().subscribe(
-      data => { this.series = data}
-    );
+    this.serieService.getSeries().subscribe({
+      next: (data) => { this.series = data},
+      error: (e) => {alert("Error: " + e.status + "\n" + e.message)}
+    });
   }
 
   ngOnDestroy(): void{

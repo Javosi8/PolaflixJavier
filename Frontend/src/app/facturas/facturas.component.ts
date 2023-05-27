@@ -18,11 +18,15 @@ export class FacturasComponent implements OnInit, OnDestroy{
 
   ngOnInit(): void {
     this.usuario = this.usuarioService.usuario;
-    this.usuarioService.getFacturas(this.usuario.username!).subscribe(data => {
-      this.facturas = data;
-      this.facturaActual = this.facturas.length;
-      this.cdr.detectChanges();
-    });
+    this.usuarioService.getFacturas(this.usuario.username!).subscribe({
+      next: (data) => {
+        this.facturas = data;
+        this.facturaActual = this.facturas.length;
+        this.cdr.detectChanges();
+      },
+      error: (e) => {alert("Error: " + e.status + "\n" + e.message)}
+    }
+    );
   }
 
   ngOnDestroy(): void {

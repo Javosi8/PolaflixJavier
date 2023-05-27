@@ -23,9 +23,10 @@ export class InicioComponent implements OnInit, OnDestroy {
   cargaUsuario(username : string | null) {
     console.log(username);
     if (!(username === null)) {
-      this.usuarioService.getUsuario(username).subscribe(
-        data => {this.usuario = data}
-      )
+      this.usuarioService.getUsuario(username).subscribe({
+        next: (data) => {this.usuario = data},
+        error: (e) =>{alert("Error: " + e.status + "\n" + e.message)}
+      })
     }
   }
 
