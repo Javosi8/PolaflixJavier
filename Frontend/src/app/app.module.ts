@@ -7,12 +7,14 @@ import { UsuarioService } from './usuario.service';
 import { SerieService } from './serie.service';
 import { InicioComponent } from './inicio/inicio.component';
 import { AgregarSerieComponent } from './agregar-serie/agregar-serie.component';
+import { FacturasComponent } from './facturas/facturas.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     InicioComponent,
     AgregarSerieComponent,
+    FacturasComponent,
   ],
   imports: [
     BrowserModule,

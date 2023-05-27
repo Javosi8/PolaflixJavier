@@ -1,0 +1,39 @@
+<div class="selectorMes">
+  <ul>
+    <li class="anterior"> <input class="boton" type="submit" value="<" (click)="facturaAnterior()" > </li>
+    <li>
+      {{facturas![facturaActual-1].fecha | date:'MMMM yyyy' }}
+    </li>
+    <li class="siguiente"> <input class="boton" type="submit" value=">" (click)="facturaSiguiente()"> </li>
+  </ul>
+</div>
+
+<div class="contenido">
+  <table class="tabla">
+    <tbody>
+      <tr>
+        <th class="celda"> Fecha </th>
+        <th class="celda"> Serie </th>
+        <th class="celda"> Episodio </th>
+        <th class="celda"> Precio </th>
+      </tr>
+      <tr>
+        <td colspan="100%" style="border-bottom: 2px solid black"></td>
+      </tr>
+      <tr *ngFor="let entrada of facturas![facturaActual-1].entradasFactura">
+        <td class="celda">{{ entrada.fecha | date:' d/MM/yyyy' }}</td>
+        <td class="celda">{{ entrada.nombreSerie }}</td>
+        <td class="celda">{{ entrada.numeroTemporada+'x'+entrada.numeroCapitulo }}</td>
+        <td class="celda">{{ entrada.coste + '€'}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="usuario.cuota !== undefined; then cuotaFija else noCuotaFija"></div>
+<ng-template #cuotaFija>
+  <label class="coste"> Cuota Fija: {{usuario.cuota + ' €'}}</label>
+</ng-template>
+<ng-template #noCuotaFija>
+  <label class="coste"> Total {{facturas![facturaActual-1].costeTotal + ' €'}}</label>
+</ng-template>

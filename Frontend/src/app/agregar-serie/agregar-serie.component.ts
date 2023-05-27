@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { SerieService } from '../serie.service';
 import { UsuarioService } from '../usuario.service';
 import { Serie } from '../serie';
@@ -10,7 +10,7 @@ import { Usuario } from '../usuario';
   styleUrls: ['./agregar-serie.component.css']
 })
 
-export class AgregarSerieComponent implements OnInit {
+export class AgregarSerieComponent implements OnInit, OnDestroy {
 
   series: Serie[] = [];
   usuario: Partial<Usuario> = {};
@@ -23,6 +23,10 @@ export class AgregarSerieComponent implements OnInit {
     this.serieService.getSeries().subscribe(
       data => { this.series = data}
     );
+  }
+
+  ngOnDestroy(): void{
+    this.usuarioService.usuario = this.usuario;
   }
 
   buscador(){

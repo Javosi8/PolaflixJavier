@@ -11,14 +11,14 @@
 }
 
 td{
-    padding: 20px;
-    text-align: left;
-    cursor: pointer;
+  padding: 20px;
+  text-align: left;
+  cursor: pointer;
 }
 
 a{
-    text-decoration:none;
-    color: #000000;
+  text-decoration:none;
+  color: #000000;
 }
   
 .bordes{
