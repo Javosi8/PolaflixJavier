@@ -35,7 +35,6 @@ public class AppFeeder implements CommandLineRunner{
     public void run(String... args){
         feedSeries();
         feedUsuarios();
-        //feedSeriesAUsuario();
 
         System.out.println("Datos añadidos correctamente en el AppFeeder");
     }
@@ -43,9 +42,17 @@ public class AppFeeder implements CommandLineRunner{
     public void feedUsuarios(){
         Usuario u1 = new UsuarioNormal("Paco", "Perez", "123456");
         Usuario u2 = new UsuarioPremium("Javier", "Canales", "88888888");
-        Optional<Serie> s = sr.findById((long)1);
-        if(s.isPresent()){
-            u2.agregarSerieAPendientes(s.get());
+        Optional<Serie> s1 = sr.findById((long)1);
+        if(s1.isPresent()){
+            u2.agregarSerieAPendientes(s1.get());
+        }
+        Optional<Serie> s2 = sr.findById((long)3);
+        if(s2.isPresent()){
+            u2.agregarSerieAPendientes(s2.get());
+        }
+        Optional<Serie> s3 = sr.findById((long)2);
+        if(s3.isPresent()){
+            u1.agregarSerieAPendientes(s3.get());
         }
         ur.save(u1);
         ur.save(u2);

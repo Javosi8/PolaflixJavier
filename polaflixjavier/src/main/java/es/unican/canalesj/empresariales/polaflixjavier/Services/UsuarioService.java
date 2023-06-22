@@ -12,16 +12,11 @@ import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Serie;
 import es.unican.canalesj.empresariales.polaflixjavier.DomainModel.Usuario;
 import es.unican.canalesj.empresariales.polaflixjavier.Repositories.SerieRepository;
 import es.unican.canalesj.empresariales.polaflixjavier.Repositories.UsuarioRepository;
-import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.PersistenceUnit;
 import jakarta.transaction.Transactional;
 
 @Service
 public class UsuarioService {
 
-    @PersistenceUnit
-    EntityManagerFactory emf;
-    
     @Autowired
     private UsuarioRepository ur;
     @Autowired
@@ -34,18 +29,24 @@ public class UsuarioService {
     @Transactional
     public Optional<Usuario> agregarSeriePendientes(String nombreUsuario, long idSerie){
         Optional<Usuario> usuario = ur.findById(nombreUsuario);
-        Optional<Serie> serie = sr.findById(idSerie);
-        if(usuario.isPresent() && serie.isPresent())
-            usuario.get().agregarSerieAPendientes(serie.get());
+        if(usuario.isPresent()){
+            Optional<Serie> serie = sr.findById(idSerie);
+            if(serie.isPresent()){
+                usuario.get().agregarSerieAPendientes(serie.get());
+            }
+        }
         return usuario;
     }
 
     @Transactional
     public Optional<Usuario> verCapitulo(String nombreUsuario, long idSerie, int idTemporada, int idCapitulo){
         Optional<Usuario> usuario = ur.findById(nombreUsuario);
-        Optional<Serie> serie = sr.findById(idSerie);
-        if(usuario.isPresent() && serie.isPresent())
-            usuario.get().verCapitulo(serie.get().getTemporadaById(idTemporada).getCapituloById(idCapitulo));
+        if(usuario.isPresent()){
+            Optional<Serie> serie = sr.findById(idSerie);
+            if(serie.isPresent()){
+                usuario.get().verCapitulo(serie.get().getTemporadaById(idTemporada).getCapituloById(idCapitulo));
+            }
+        }
         return usuario;
     }
 

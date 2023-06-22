@@ -29,49 +29,51 @@ public class SerieController {
     @GetMapping
     @JsonView({Views.DescripcionSerie.class})
     public ResponseEntity<List<Serie>> getSeries(){
-        List<Serie> series = ss.getSeries();
-        ResponseEntity<List<Serie>> result;
-        if(series.isEmpty())
-            result = ResponseEntity.badRequest().build();
-        else
-            result = ResponseEntity.ok(series);
-        return result;
+        try{
+            List<Serie> series = ss.getSeries();
+            return ResponseEntity.ok(series);
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @GetMapping(value = "/{idSerie}")
     @JsonView({Views.DescripcionSerie.class})
     public ResponseEntity<Serie> getSerie(@PathVariable long idSerie){
-        Optional<Serie> serie = ss.getSerie(idSerie);
-        ResponseEntity<Serie> result;
-        if(serie.isPresent())
-            result = ResponseEntity.ok(serie.get());
-        else
-            result = ResponseEntity.notFound().build();
-        return result;
+        try{
+            Optional<Serie> serie = ss.getSerie(idSerie);
+            ResponseEntity<Serie> result;
+            if(serie.isPresent())
+                result = ResponseEntity.ok(serie.get());
+            else
+                result = ResponseEntity.notFound().build();
+            return result;
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
+        
     }
 
     @GetMapping(params = "inicial")
     @JsonView({Views.DescripcionSerie.class})
     public ResponseEntity<List<Serie>> getSerieByInicial(@RequestParam char inicial){
-        List<Serie> series = ss.getSerieByInicial(inicial);
-        ResponseEntity<List<Serie>> result;
-        if(series.isEmpty())
-            result = ResponseEntity.badRequest().build();
-        else
-            result = ResponseEntity.ok(series);
-        return result;
+        try{
+            List<Serie> series = ss.getSerieByInicial(inicial);
+            return ResponseEntity.ok(series);
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @GetMapping(params = "titulo")
     @JsonView({Views.DescripcionSerie.class})
-    public ResponseEntity<List<Serie>> getSerieByNombre(@RequestParam String titulo){
-        List<Serie> series = ss.getSerieByTitulo(titulo);
-        ResponseEntity<List<Serie>> result;
-        if(series.isEmpty())
-            result = ResponseEntity.badRequest().build();
-        else
-            result = ResponseEntity.ok(series);
-        return result;
+    public ResponseEntity<List<Serie>> getSerieByTitulo(@RequestParam String titulo){
+        try{
+            List<Serie> series = ss.getSerieByTitulo(titulo);
+            return ResponseEntity.ok(series);
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
 }

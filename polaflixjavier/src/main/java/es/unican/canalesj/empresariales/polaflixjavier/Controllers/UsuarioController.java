@@ -31,13 +31,17 @@ public class UsuarioController {
     @GetMapping(value = "/{nombreUsuario}")
     @JsonView({Views.DescripcionUsuario.class})
     public ResponseEntity<Usuario> getUsuario(@PathVariable String nombreUsuario){
-        Optional<Usuario> usuario = us.getUsuario(nombreUsuario);
-        ResponseEntity<Usuario> result;
-        if(usuario.isPresent())
-            result = ResponseEntity.ok(usuario.get());
-        else
-            result = ResponseEntity.notFound().build();
-        return result;
+        try{
+            Optional<Usuario> usuario = us.getUsuario(nombreUsuario);
+            ResponseEntity<Usuario> result;
+            if(usuario.isPresent())
+                result = ResponseEntity.ok(usuario.get());
+            else
+                result = ResponseEntity.notFound().build();
+            return result;
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
     }
 
     @PutMapping(value = "/{nombreUsuario}/pendientes/{idSerie}")
@@ -48,7 +52,7 @@ public class UsuarioController {
         if(usuario.isPresent())
             result = ResponseEntity.ok(usuario.get());    
         else
-            result = ResponseEntity.badRequest().build();
+            result = ResponseEntity.internalServerError().build();
         return result;
     }
 
@@ -61,20 +65,19 @@ public class UsuarioController {
         if(usuario.isPresent())
             result = ResponseEntity.ok(usuario.get());
         else
-            result = ResponseEntity.badRequest().build();
+            result = ResponseEntity.internalServerError().build();
         return result;
     }
 
     @GetMapping(value = "/{nombreUsuario}/facturas")
     @JsonView({Views.DescripcionFactura.class})
     public ResponseEntity<List<Factura>> getFacturas(@PathVariable String nombreUsuario){
-        ResponseEntity<List<Factura>> result;
-        List<Factura> facturas = us.getFacturas(nombreUsuario);
-        if(facturas.isEmpty())
-            result = ResponseEntity.badRequest().build();
-        else
-            result = ResponseEntity.ok(facturas);
-        return result;
+        try{
+            List<Factura> facturas = us.getFacturas(nombreUsuario);
+            return ResponseEntity.ok(facturas);
+        }catch(Exception ex){
+            return ResponseEntity.internalServerError().build();
+        }
     }
     
 }

@@ -89,11 +89,13 @@ public abstract class Usuario {
             nuevaFactura.agregarEntrada(cap, fechaActual);
             facturas.add(facturaVigente);
         }
+
         if(!empezadas.contains(cap.getTemporada().getSerie())){
             agregarSerieAEmpezadas(cap.getTemporada().getSerie());
         }
 
-        if(cap.getTemporada().getSerie().getTemporadas().last().getCapitulos().last().getNumCapitulo() == cap.getNumCapitulo()){
+        if(cap.getTemporada().getSerie().getTemporadas().last().getCapitulos().last().getNumCapitulo() == cap.getNumCapitulo()
+            && cap.getTemporada().getSerie().getTemporadas().last().getNumTemporada() == cap.getTemporada().getNumTemporada()){
             agregarSerieATerminadas(cap.getTemporada().getSerie());
         }
 

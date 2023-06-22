@@ -24,9 +24,18 @@ export class FacturasComponent implements OnInit, OnDestroy{
         this.facturaActual = this.facturas.length;
         this.cdr.detectChanges();
       },
-      error: (e) => {alert("Error: " + e.status + "\n" + e.message)}
-    }
-    );
+      error: (e) => {
+        switch(e.status){
+          case 404:
+            alert("Error: " + e.status + "\n" + "El recurso solicitado no existe en el sistema")
+            break;
+          case 500:
+            alert("Error: " + e.status + "\n" + "Actualmente estamos experimentando problemas en nuestros sistemas\n"
+              + "Por favor, vuelva a intentarlo en unos minutos. Disculpe las molestias")
+            break;
+        }
+      }
+    });
   }
 
   ngOnDestroy(): void {

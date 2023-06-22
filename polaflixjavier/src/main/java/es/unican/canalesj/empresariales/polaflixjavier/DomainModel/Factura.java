@@ -103,7 +103,7 @@ public class Factura implements Comparable<Factura>{
 
     @Override
     public int hashCode(){
-        return Objects.hash(costeTotal, fecha, usuario);
+        return Objects.hash(costeTotal, mes, año, usuario);
     }
 
     @Override
@@ -116,8 +116,8 @@ public class Factura implements Comparable<Factura>{
         }
 
         Factura factura = (Factura)o;
-        return (this.costeTotal == factura.getCosteTotal()) && (this.getMes() == factura.getMes()) 
-        && (this.getAño() == factura.getAño()) && (this.usuario.equals(factura.getUsuario()));
+        return (this.costeTotal == factura.getCosteTotal()) && (this.mes == factura.getMes()) 
+        && (this.año == factura.getAño()) && (this.usuario.equals(factura.getUsuario()));
     }
 
     @Override

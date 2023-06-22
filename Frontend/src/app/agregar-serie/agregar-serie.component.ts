@@ -22,7 +22,17 @@ export class AgregarSerieComponent implements OnInit, OnDestroy {
     this.usuario = this.usuarioService.usuario;
     this.serieService.getSeries().subscribe({
       next: (data) => { this.series = data},
-      error: (e) => {alert("Error: " + e.status + "\n" + e.message)}
+      error: (e) => {
+        switch(e.status){
+          case 404:
+            alert("Error: " + e.status + "\n" + "El recurso solicitado no existe en el sistema")
+            break;
+          case 500:
+            alert("Error: " + e.status + "\n" + "Actualmente estamos experimentando problemas en nuestros sistemas\n"
+              + "Por favor, vuelva a intentarlo en unos minutos. Disculpe las molestias")
+            break;
+        }
+      }
     });
   }
 
@@ -46,8 +56,19 @@ export class AgregarSerieComponent implements OnInit, OnDestroy {
 
   agregaSerie(id: number){
     if(this.usuario.username !== undefined){
-      this.usuarioService.agregarSeriePendiente(this.usuario.username, id).subscribe(data => {
-        this.usuario = data;
+      this.usuarioService.agregarSeriePendiente(this.usuario.username, id).subscribe({
+        next: (data) => {this.usuario = data},
+        error: (e) => {
+          switch(e.status){
+            case 404:
+              alert("Error: " + e.status + "\n" + "El recurso solicitado no existe en el sistema")
+              break;
+            case 500:
+              alert("Error: " + e.status + "\n" + "Actualmente estamos experimentando problemas en nuestros sistemas\n"
+                + "Por favor, vuelva a intentarlo en unos minutos. Disculpe las molestias")
+              break;
+          }
+        }
       });
     }
   }

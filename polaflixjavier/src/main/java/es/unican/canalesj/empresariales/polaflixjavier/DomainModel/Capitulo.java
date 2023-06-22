@@ -92,7 +92,7 @@ public class Capitulo implements Comparable<Capitulo>{
 
     @Override
     public int hashCode(){
-        return Objects.hash(numCapitulo, titulo, enlace, temporada);
+        return Objects.hash(numCapitulo, titulo, duracion, enlace, temporada);
     }
 
     @Override
@@ -107,7 +107,8 @@ public class Capitulo implements Comparable<Capitulo>{
 
         Capitulo capitulo = (Capitulo)o;
         return ((this.numCapitulo == capitulo.getNumCapitulo()) && (this.titulo.equals(capitulo.getTitulo()))
-        && (this.temporada.equals(capitulo.getTemporada())) && (this.enlace.equals(capitulo.getEnlace())));
+        && (this.temporada.equals(capitulo.getTemporada())) && (this.enlace.equals(capitulo.getEnlace()))
+        && (this.duracion == capitulo.getDuracion()));
     }
 
     @Override
